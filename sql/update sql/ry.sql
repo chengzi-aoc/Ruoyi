@@ -11,7 +11,7 @@
  Target Server Version : 80018
  File Encoding         : 65001
 
- Date: 19/10/2020 14:45:38
+ Date: 20/10/2020 17:19:26
 */
 
 SET NAMES utf8mb4;
@@ -37,21 +37,6 @@ CREATE TABLE `blog_article_info`  (
   `update_time` datetime(0) NULL DEFAULT NULL COMMENT '修改时间',
   PRIMARY KEY (`article_id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '文章内容信息表' ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Table structure for blog_article_label
--- ----------------------------
-DROP TABLE IF EXISTS `blog_article_label`;
-CREATE TABLE `blog_article_label`  (
-  `label_id` int(40) NOT NULL COMMENT '主键',
-  `label_name` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL COMMENT '标签名称',
-  `label_code` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL COMMENT '标签码',
-  `create_user` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL COMMENT '创建人',
-  `create_time` datetime(0) NOT NULL COMMENT '创建时间',
-  `update_user` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '修改人',
-  `update_time` datetime(0) NULL DEFAULT NULL COMMENT '修改时间',
-  PRIMARY KEY (`label_id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '文章标签表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for blog_attention
@@ -186,7 +171,19 @@ CREATE TABLE `gen_table`  (
   `update_time` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',
   `remark` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`table_id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '代码生成业务表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '代码生成业务表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of gen_table
+-- ----------------------------
+INSERT INTO `gen_table` VALUES (1, 'blog_article_info', '文章内容信息表', NULL, NULL, 'BlogArticleInfo', 'crud', 'com.ruoyi.system', 'system', 'info', '文章内容信息', 'ruoyi', '0', '/', '{\"parentMenuId\":\"\",\"treeName\":\"\",\"treeParentCode\":\"\",\"parentMenuName\":\"\",\"treeCode\":\"\"}', 'admin', '2020-10-19 22:18:07', '', '2020-10-20 15:54:00', '');
+INSERT INTO `gen_table` VALUES (3, 'blog_attention', '关注信息表', NULL, NULL, 'BlogAttention', 'crud', 'com.ruoyi.system', 'system', 'attention', '关注信息', 'ruoyi', '0', '/', NULL, 'admin', '2020-10-19 22:18:07', '', NULL, NULL);
+INSERT INTO `gen_table` VALUES (4, 'blog_collect', '收藏表', NULL, NULL, 'BlogCollect', 'crud', 'com.ruoyi.system', 'system', 'collect', '收藏', 'ruoyi', '0', '/', NULL, 'admin', '2020-10-19 22:18:07', '', NULL, NULL);
+INSERT INTO `gen_table` VALUES (5, 'blog_comment_reply', '评论回复表', NULL, NULL, 'BlogCommentReply', 'crud', 'com.ruoyi.system', 'system', 'reply', '评论回复', 'ruoyi', '0', '/', NULL, 'admin', '2020-10-19 22:18:07', '', NULL, NULL);
+INSERT INTO `gen_table` VALUES (6, 'blog_feedback', '反馈建议表', NULL, NULL, 'BlogFeedback', 'crud', 'com.ruoyi.system', 'system', 'feedback', '反馈建议', 'ruoyi', '0', '/', NULL, 'admin', '2020-10-19 22:18:07', '', NULL, NULL);
+INSERT INTO `gen_table` VALUES (7, 'blog_like', '点赞表', NULL, NULL, 'BlogLike', 'crud', 'com.ruoyi.system', 'system', 'like', '点赞', 'ruoyi', '0', '/', NULL, 'admin', '2020-10-19 22:18:07', '', NULL, NULL);
+INSERT INTO `gen_table` VALUES (8, 'blog_link', '友情链接表', NULL, NULL, 'BlogLink', 'crud', 'com.ruoyi.system', 'system', 'link', '友情链接', 'ruoyi', '0', '/', NULL, 'admin', '2020-10-19 22:18:07', '', NULL, NULL);
+INSERT INTO `gen_table` VALUES (9, 'blog_user_info', '博主信息表', NULL, NULL, 'BlogUserInfo', 'crud', 'com.ruoyi.system', 'system', 'info', '博主信息', 'ruoyi', '0', '/', '{\"parentMenuId\":\"\",\"treeName\":\"\",\"treeParentCode\":\"\",\"parentMenuName\":\"\",\"treeCode\":\"\"}', 'admin', '2020-10-19 22:18:07', '', '2020-10-19 22:53:44', '');
 
 -- ----------------------------
 -- Table structure for gen_table_column
@@ -216,7 +213,75 @@ CREATE TABLE `gen_table_column`  (
   `update_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '更新者',
   `update_time` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`column_id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '代码生成业务表字段' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 72 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '代码生成业务表字段' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of gen_table_column
+-- ----------------------------
+INSERT INTO `gen_table_column` VALUES (1, '1', 'article_id', '文章id', 'int(40)', 'Long', 'articleId', '1', '0', NULL, '1', NULL, NULL, NULL, 'EQ', 'input', '', 1, 'admin', '2020-10-19 22:18:07', NULL, '2020-10-20 15:54:00');
+INSERT INTO `gen_table_column` VALUES (2, '1', 'article_user_id', '文章所属用户id', 'int(50)', 'Long', 'articleUserId', '0', '0', '1', '1', '1', '1', '1', 'EQ', 'input', '', 2, 'admin', '2020-10-19 22:18:07', NULL, '2020-10-20 15:54:00');
+INSERT INTO `gen_table_column` VALUES (3, '1', 'article_name', '文章名称', 'varchar(100)', 'String', 'articleName', '0', '0', '1', '1', '1', '1', '1', 'LIKE', 'input', '', 3, 'admin', '2020-10-19 22:18:07', NULL, '2020-10-20 15:54:00');
+INSERT INTO `gen_table_column` VALUES (4, '1', 'article_label', '文章标签', 'varchar(40)', 'String', 'articleLabel', '0', '0', '1', '1', '1', '1', '1', 'EQ', 'select', 'blog_article_label', 4, 'admin', '2020-10-19 22:18:07', NULL, '2020-10-20 15:54:00');
+INSERT INTO `gen_table_column` VALUES (5, '1', 'article_abstract', '文章摘要', 'varchar(300)', 'String', 'articleAbstract', '0', '0', '1', '1', '1', '1', '1', 'EQ', 'input', '', 5, 'admin', '2020-10-19 22:18:07', NULL, '2020-10-20 15:54:00');
+INSERT INTO `gen_table_column` VALUES (6, '1', 'article_content', '文章主题内容', 'varchar(2000)', 'String', 'articleContent', '0', '0', '1', '1', '1', '1', '1', 'EQ', 'summernote', '', 6, 'admin', '2020-10-19 22:18:07', NULL, '2020-10-20 15:54:00');
+INSERT INTO `gen_table_column` VALUES (7, '1', 'article_oriiginal', '是否原创（0：是；1：不是）', 'varchar(1)', 'String', 'articleOriiginal', '0', '0', '1', '1', '1', '1', '1', 'EQ', 'select', 'blog_original', 7, 'admin', '2020-10-19 22:18:07', NULL, '2020-10-20 15:54:00');
+INSERT INTO `gen_table_column` VALUES (8, '1', 'visit_number', '访问次数', 'int(5)', 'Integer', 'visitNumber', '0', '0', NULL, '1', '1', '1', '1', 'EQ', 'input', '', 8, 'admin', '2020-10-19 22:18:07', NULL, '2020-10-20 15:54:00');
+INSERT INTO `gen_table_column` VALUES (9, '1', 'create_user', '创建人', 'varchar(40)', 'String', 'createUser', '0', '0', '1', '1', '1', '1', '1', 'EQ', 'input', '', 9, 'admin', '2020-10-19 22:18:07', NULL, '2020-10-20 15:54:00');
+INSERT INTO `gen_table_column` VALUES (10, '1', 'create_time', '创建时间', 'datetime', 'Date', 'createTime', '0', '0', '1', '1', NULL, NULL, NULL, 'EQ', 'datetime', '', 10, 'admin', '2020-10-19 22:18:07', NULL, '2020-10-20 15:54:00');
+INSERT INTO `gen_table_column` VALUES (11, '1', 'delete_flag', '删除标记（0：未删除；1：已删除）', 'varchar(1)', 'String', 'deleteFlag', '0', '0', '1', '1', '1', '1', '1', 'EQ', 'input', '', 11, 'admin', '2020-10-19 22:18:07', NULL, '2020-10-20 15:54:00');
+INSERT INTO `gen_table_column` VALUES (12, '1', 'update_user', '修改人', 'varchar(40)', 'String', 'updateUser', '0', '0', '1', '1', '1', '1', '1', 'EQ', 'input', '', 12, 'admin', '2020-10-19 22:18:07', NULL, '2020-10-20 15:54:00');
+INSERT INTO `gen_table_column` VALUES (13, '1', 'update_time', '修改时间', 'datetime', 'Date', 'updateTime', '0', '0', NULL, '1', '1', NULL, NULL, 'EQ', 'datetime', '', 13, 'admin', '2020-10-19 22:18:07', NULL, '2020-10-20 15:54:00');
+INSERT INTO `gen_table_column` VALUES (21, '3', 'id', '主键', 'int(40)', 'Long', 'id', '1', '0', NULL, '1', NULL, NULL, NULL, 'EQ', 'input', '', 1, 'admin', '2020-10-19 22:18:07', '', NULL);
+INSERT INTO `gen_table_column` VALUES (22, '3', 'user_id', '所属用户id', 'int(50)', 'Long', 'userId', '0', '0', '1', '1', '1', '1', '1', 'EQ', 'input', '', 2, 'admin', '2020-10-19 22:18:07', '', NULL);
+INSERT INTO `gen_table_column` VALUES (23, '3', 'attention_id', '关注人id', 'int(40)', 'Long', 'attentionId', '0', '0', '1', '1', '1', '1', '1', 'EQ', 'input', '', 3, 'admin', '2020-10-19 22:18:07', '', NULL);
+INSERT INTO `gen_table_column` VALUES (24, '3', 'attention_name', '关注人姓名', 'varchar(100)', 'String', 'attentionName', '0', '0', '1', '1', '1', '1', '1', 'LIKE', 'input', '', 4, 'admin', '2020-10-19 22:18:07', '', NULL);
+INSERT INTO `gen_table_column` VALUES (25, '3', 'create_user', '创建人', 'varchar(40)', 'String', 'createUser', '0', '0', '1', '1', '1', '1', '1', 'EQ', 'input', '', 5, 'admin', '2020-10-19 22:18:07', '', NULL);
+INSERT INTO `gen_table_column` VALUES (26, '3', 'create_time', '创建时间', 'datetime', 'Date', 'createTime', '0', '0', '1', '1', NULL, NULL, NULL, 'EQ', 'datetime', '', 6, 'admin', '2020-10-19 22:18:07', '', NULL);
+INSERT INTO `gen_table_column` VALUES (27, '3', 'delete_flag', '删除标记（0：未删除；1：已删除）', 'varchar(1)', 'String', 'deleteFlag', '0', '0', '1', '1', '1', '1', '1', 'EQ', 'input', '', 7, 'admin', '2020-10-19 22:18:07', '', NULL);
+INSERT INTO `gen_table_column` VALUES (28, '4', 'collect_id', '主键', 'int(40)', 'Long', 'collectId', '1', '0', NULL, '1', NULL, NULL, NULL, 'EQ', 'input', '', 1, 'admin', '2020-10-19 22:18:07', '', NULL);
+INSERT INTO `gen_table_column` VALUES (29, '4', 'collect_user_id', '所属用户id', 'int(50)', 'Long', 'collectUserId', '0', '0', '1', '1', '1', '1', '1', 'EQ', 'input', '', 2, 'admin', '2020-10-19 22:18:07', '', NULL);
+INSERT INTO `gen_table_column` VALUES (30, '4', 'article_id', '文章id', 'int(40)', 'Long', 'articleId', '0', '0', '1', '1', '1', '1', '1', 'EQ', 'input', '', 3, 'admin', '2020-10-19 22:18:07', '', NULL);
+INSERT INTO `gen_table_column` VALUES (31, '4', 'create_user', '收藏人', 'varchar(40)', 'String', 'createUser', '0', '0', '1', '1', '1', '1', '1', 'EQ', 'input', '', 4, 'admin', '2020-10-19 22:18:07', '', NULL);
+INSERT INTO `gen_table_column` VALUES (32, '4', 'create_time', '收藏时间', 'datetime', 'Date', 'createTime', '0', '0', '1', '1', NULL, NULL, NULL, 'EQ', 'datetime', '', 5, 'admin', '2020-10-19 22:18:07', '', NULL);
+INSERT INTO `gen_table_column` VALUES (33, '4', 'delete_flag', '删除标记（0：未删除；1：已删除）', 'varchar(1)', 'String', 'deleteFlag', '0', '0', '1', '1', '1', '1', '1', 'EQ', 'input', '', 6, 'admin', '2020-10-19 22:18:07', '', NULL);
+INSERT INTO `gen_table_column` VALUES (34, '5', 'reply_id', '主键', 'int(40)', 'Long', 'replyId', '1', '0', NULL, '1', NULL, NULL, NULL, 'EQ', 'input', '', 1, 'admin', '2020-10-19 22:18:07', '', NULL);
+INSERT INTO `gen_table_column` VALUES (35, '5', 'reply_user_id', '所属用户id', 'int(40)', 'Long', 'replyUserId', '0', '0', '1', '1', '1', '1', '1', 'EQ', 'input', '', 2, 'admin', '2020-10-19 22:18:07', '', NULL);
+INSERT INTO `gen_table_column` VALUES (36, '5', 'reply_number', '文章编号', 'int(50)', 'Long', 'replyNumber', '0', '0', '1', '1', '1', '1', '1', 'EQ', 'input', '', 3, 'admin', '2020-10-19 22:18:07', '', NULL);
+INSERT INTO `gen_table_column` VALUES (37, '5', 'reply_content', '内容', 'varchar(2000)', 'String', 'replyContent', '0', '0', '1', '1', '1', '1', '1', 'EQ', 'summernote', '', 4, 'admin', '2020-10-19 22:18:07', '', NULL);
+INSERT INTO `gen_table_column` VALUES (38, '5', 'public_time', '发表时间', 'datetime', 'Date', 'publicTime', '0', '0', '1', '1', '1', '1', '1', 'EQ', 'datetime', '', 5, 'admin', '2020-10-19 22:18:07', '', NULL);
+INSERT INTO `gen_table_column` VALUES (39, '5', 'visit_number', '访问次数', 'int(5)', 'Integer', 'visitNumber', '0', '0', NULL, '1', '1', '1', '1', 'EQ', 'input', '', 6, 'admin', '2020-10-19 22:18:07', '', NULL);
+INSERT INTO `gen_table_column` VALUES (40, '6', 'feed_id', '主键', 'int(40)', 'Long', 'feedId', '1', '0', NULL, '1', NULL, NULL, NULL, 'EQ', 'input', '', 1, 'admin', '2020-10-19 22:18:07', '', NULL);
+INSERT INTO `gen_table_column` VALUES (41, '6', 'feed_user_id', '所属用户id', 'int(50)', 'Long', 'feedUserId', '0', '0', '1', '1', '1', '1', '1', 'EQ', 'input', '', 2, 'admin', '2020-10-19 22:18:07', '', NULL);
+INSERT INTO `gen_table_column` VALUES (42, '6', 'feed_content', '反馈内容', 'varchar(2000)', 'String', 'feedContent', '0', '0', '1', '1', '1', '1', '1', 'EQ', 'summernote', '', 3, 'admin', '2020-10-19 22:18:07', '', NULL);
+INSERT INTO `gen_table_column` VALUES (43, '6', 'feed_contact', '联系方式', 'int(11)', 'Long', 'feedContact', '0', '0', '1', '1', '1', '1', '1', 'EQ', 'input', '', 4, 'admin', '2020-10-19 22:18:07', '', NULL);
+INSERT INTO `gen_table_column` VALUES (44, '6', 'public_time', '发表时间', 'datetime', 'Date', 'publicTime', '0', '0', NULL, '1', '1', '1', '1', 'EQ', 'datetime', '', 5, 'admin', '2020-10-19 22:18:07', '', NULL);
+INSERT INTO `gen_table_column` VALUES (45, '7', 'like_id', '主键', 'int(40)', 'Long', 'likeId', '1', '0', NULL, '1', NULL, NULL, NULL, 'EQ', 'input', '', 1, 'admin', '2020-10-19 22:18:07', '', NULL);
+INSERT INTO `gen_table_column` VALUES (46, '7', 'like_user_id', '所属用户id', 'int(11)', 'Long', 'likeUserId', '0', '0', '1', '1', '1', '1', '1', 'EQ', 'input', '', 2, 'admin', '2020-10-19 22:18:07', '', NULL);
+INSERT INTO `gen_table_column` VALUES (47, '7', 'article_id', '文章id', 'int(11)', 'Long', 'articleId', '0', '0', '1', '1', '1', '1', '1', 'EQ', 'input', '', 3, 'admin', '2020-10-19 22:18:07', '', NULL);
+INSERT INTO `gen_table_column` VALUES (48, '7', 'create_user', '点赞人', 'varchar(255)', 'String', 'createUser', '0', '0', '1', '1', '1', '1', '1', 'EQ', 'input', '', 4, 'admin', '2020-10-19 22:18:07', '', NULL);
+INSERT INTO `gen_table_column` VALUES (49, '7', 'create_time', '点赞时间', 'datetime', 'Date', 'createTime', '0', '0', '1', '1', NULL, NULL, NULL, 'EQ', 'datetime', '', 5, 'admin', '2020-10-19 22:18:07', '', NULL);
+INSERT INTO `gen_table_column` VALUES (50, '8', 'link_id', '主键', 'int(40)', 'Long', 'linkId', '1', '0', NULL, '1', NULL, NULL, NULL, 'EQ', 'input', '', 1, 'admin', '2020-10-19 22:18:07', '', NULL);
+INSERT INTO `gen_table_column` VALUES (51, '8', 'link_user_id', '所属用户id', 'int(50)', 'Long', 'linkUserId', '0', '0', '1', '1', '1', '1', '1', 'EQ', 'input', '', 2, 'admin', '2020-10-19 22:18:07', '', NULL);
+INSERT INTO `gen_table_column` VALUES (52, '8', 'article_id', '文章id', 'int(40)', 'Long', 'articleId', '0', '0', '1', '1', '1', '1', '1', 'EQ', 'input', '', 3, 'admin', '2020-10-19 22:18:07', '', NULL);
+INSERT INTO `gen_table_column` VALUES (53, '8', 'link_name', '链接名称', 'varchar(20)', 'String', 'linkName', '0', '0', '1', '1', '1', '1', '1', 'LIKE', 'input', '', 4, 'admin', '2020-10-19 22:18:07', '', NULL);
+INSERT INTO `gen_table_column` VALUES (54, '8', 'link_url', '链接URL', 'varchar(50)', 'String', 'linkUrl', '0', '0', '1', '1', '1', '1', '1', 'EQ', 'input', '', 5, 'admin', '2020-10-19 22:18:07', '', NULL);
+INSERT INTO `gen_table_column` VALUES (55, '8', 'create_user', '创建人', 'varchar(40)', 'String', 'createUser', '0', '0', '1', '1', '1', '1', '1', 'EQ', 'input', '', 6, 'admin', '2020-10-19 22:18:07', '', NULL);
+INSERT INTO `gen_table_column` VALUES (56, '8', 'create_time', '创建时间', 'datetime', 'Date', 'createTime', '0', '0', '1', '1', NULL, NULL, NULL, 'EQ', 'datetime', '', 7, 'admin', '2020-10-19 22:18:07', '', NULL);
+INSERT INTO `gen_table_column` VALUES (57, '9', 'user_id', '博主ID', 'int(40)', 'Long', 'userId', '1', '0', NULL, '1', NULL, NULL, NULL, 'EQ', 'input', '', 1, 'admin', '2020-10-19 22:18:07', NULL, '2020-10-19 22:53:44');
+INSERT INTO `gen_table_column` VALUES (58, '9', 'blog_username', '用户名', 'varchar(10)', 'String', 'blogUsername', '0', '0', '1', '1', '1', '1', '1', 'LIKE', 'input', '', 2, 'admin', '2020-10-19 22:18:07', NULL, '2020-10-19 22:53:44');
+INSERT INTO `gen_table_column` VALUES (59, '9', 'blog_password', '用户密码', 'varchar(10)', 'String', 'blogPassword', '0', '0', '1', '1', '1', '1', '1', 'EQ', 'input', '', 3, 'admin', '2020-10-19 22:18:07', NULL, '2020-10-19 22:53:44');
+INSERT INTO `gen_table_column` VALUES (60, '9', 'blog_nickname', '用户昵称', 'varchar(10)', 'String', 'blogNickname', '0', '0', '1', '1', '1', '1', '1', 'LIKE', 'input', '', 4, 'admin', '2020-10-19 22:18:07', NULL, '2020-10-19 22:53:44');
+INSERT INTO `gen_table_column` VALUES (61, '9', 'blog_sex', '用户性别', 'varchar(1)', 'String', 'blogSex', '0', '0', '1', '1', '1', '1', '1', 'EQ', 'select', 'sys_user_sex', 5, 'admin', '2020-10-19 22:18:07', NULL, '2020-10-19 22:53:44');
+INSERT INTO `gen_table_column` VALUES (62, '9', 'blog_qq', '用户qq号', 'varchar(12)', 'String', 'blogQq', '0', '0', '1', '1', '1', '1', '1', 'LIKE', 'input', '', 6, 'admin', '2020-10-19 22:18:07', NULL, '2020-10-19 22:53:44');
+INSERT INTO `gen_table_column` VALUES (63, '9', 'blog_interest', '用户兴趣', 'varchar(40)', 'String', 'blogInterest', '0', '0', '1', '1', '1', '1', '1', 'EQ', 'input', '', 7, 'admin', '2020-10-19 22:18:07', NULL, '2020-10-19 22:53:44');
+INSERT INTO `gen_table_column` VALUES (64, '9', 'blog_email', '用户邮箱', 'varchar(20)', 'String', 'blogEmail', '0', '0', NULL, '1', '1', '1', '1', 'EQ', 'input', '', 8, 'admin', '2020-10-19 22:18:07', NULL, '2020-10-19 22:53:44');
+INSERT INTO `gen_table_column` VALUES (65, '9', 'blog_stylename', '个性签名', 'varchar(100)', 'String', 'blogStylename', '0', '0', NULL, '1', '1', '1', '1', 'LIKE', 'input', '', 9, 'admin', '2020-10-19 22:18:07', NULL, '2020-10-19 22:53:44');
+INSERT INTO `gen_table_column` VALUES (66, '9', 'blog_address', '用户地址', 'varchar(50)', 'String', 'blogAddress', '0', '0', NULL, '1', '1', '1', '1', 'EQ', 'input', '', 10, 'admin', '2020-10-19 22:18:07', NULL, '2020-10-19 22:53:44');
+INSERT INTO `gen_table_column` VALUES (67, '9', 'create_user', '创建人', 'varchar(50)', 'String', 'createUser', '0', '0', '1', '1', '1', '1', '1', 'EQ', 'input', '', 11, 'admin', '2020-10-19 22:18:07', NULL, '2020-10-19 22:53:44');
+INSERT INTO `gen_table_column` VALUES (68, '9', 'create_time', '创建时间', 'datetime', 'Date', 'createTime', '0', '0', '1', '1', NULL, NULL, NULL, 'EQ', 'datetime', '', 12, 'admin', '2020-10-19 22:18:07', NULL, '2020-10-19 22:53:44');
+INSERT INTO `gen_table_column` VALUES (69, '9', 'delete_flag', '删除标记：（0：未删除；1：已删除）', 'varchar(1)', 'String', 'deleteFlag', '0', '0', '1', '1', '1', '1', '1', 'EQ', 'input', '', 13, 'admin', '2020-10-19 22:18:07', NULL, '2020-10-19 22:53:44');
+INSERT INTO `gen_table_column` VALUES (70, '9', 'update_time', '修改人', 'datetime', 'Date', 'updateTime', '0', '0', '1', '1', '1', NULL, NULL, 'EQ', 'datetime', '', 14, 'admin', '2020-10-19 22:18:07', NULL, '2020-10-19 22:53:44');
+INSERT INTO `gen_table_column` VALUES (71, '9', 'update_user', '修改时间', 'varchar(50)', 'String', 'updateUser', '0', '0', NULL, '1', '1', '1', '1', 'EQ', 'input', '', 15, 'admin', '2020-10-19 22:18:07', NULL, '2020-10-19 22:53:44');
 
 -- ----------------------------
 -- Table structure for qrtz_blob_triggers
@@ -350,7 +415,7 @@ CREATE TABLE `qrtz_scheduler_state`  (
 -- ----------------------------
 -- Records of qrtz_scheduler_state
 -- ----------------------------
-INSERT INTO `qrtz_scheduler_state` VALUES ('RuoyiScheduler', 'LAPTOP-22UGRTDD1602930095199', 1602930158179, 15000);
+INSERT INTO `qrtz_scheduler_state` VALUES ('RuoyiScheduler', 'LAPTOP-22UGRTDD1603180303956', 1603183533520, 15000);
 
 -- ----------------------------
 -- Table structure for qrtz_simple_triggers
@@ -419,9 +484,9 @@ CREATE TABLE `qrtz_triggers`  (
 -- ----------------------------
 -- Records of qrtz_triggers
 -- ----------------------------
-INSERT INTO `qrtz_triggers` VALUES ('RuoyiScheduler', 'TASK_CLASS_NAME1', 'DEFAULT', 'TASK_CLASS_NAME1', 'DEFAULT', NULL, 1602930100000, -1, 5, 'PAUSED', 'CRON', 1602930095000, 0, NULL, 2, '');
-INSERT INTO `qrtz_triggers` VALUES ('RuoyiScheduler', 'TASK_CLASS_NAME2', 'DEFAULT', 'TASK_CLASS_NAME2', 'DEFAULT', NULL, 1602930105000, -1, 5, 'PAUSED', 'CRON', 1602930095000, 0, NULL, 2, '');
-INSERT INTO `qrtz_triggers` VALUES ('RuoyiScheduler', 'TASK_CLASS_NAME3', 'DEFAULT', 'TASK_CLASS_NAME3', 'DEFAULT', NULL, 1602930100000, -1, 5, 'PAUSED', 'CRON', 1602930095000, 0, NULL, 2, '');
+INSERT INTO `qrtz_triggers` VALUES ('RuoyiScheduler', 'TASK_CLASS_NAME1', 'DEFAULT', 'TASK_CLASS_NAME1', 'DEFAULT', NULL, 1603180310000, -1, 5, 'PAUSED', 'CRON', 1603180304000, 0, NULL, 2, '');
+INSERT INTO `qrtz_triggers` VALUES ('RuoyiScheduler', 'TASK_CLASS_NAME2', 'DEFAULT', 'TASK_CLASS_NAME2', 'DEFAULT', NULL, 1603180305000, -1, 5, 'PAUSED', 'CRON', 1603180304000, 0, NULL, 2, '');
+INSERT INTO `qrtz_triggers` VALUES ('RuoyiScheduler', 'TASK_CLASS_NAME3', 'DEFAULT', 'TASK_CLASS_NAME3', 'DEFAULT', NULL, 1603180320000, -1, 5, 'PAUSED', 'CRON', 1603180304000, 0, NULL, 2, '');
 
 -- ----------------------------
 -- Table structure for sys_config
@@ -439,7 +504,7 @@ CREATE TABLE `sys_config`  (
   `update_time` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',
   `remark` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`config_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '参数配置表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 100 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '参数配置表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_config
@@ -474,7 +539,7 @@ CREATE TABLE `sys_dept`  (
   `update_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '更新者',
   `update_time` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`dept_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 109 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '部门表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 200 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '部门表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_dept
@@ -510,7 +575,7 @@ CREATE TABLE `sys_dict_data`  (
   `update_time` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',
   `remark` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`dict_code`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 29 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '字典数据表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 107 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '字典数据表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_dict_data
@@ -544,6 +609,13 @@ INSERT INTO `sys_dict_data` VALUES (26, 8, '生成代码', '8', 'sys_oper_type',
 INSERT INTO `sys_dict_data` VALUES (27, 9, '清空数据', '9', 'sys_oper_type', '', 'danger', 'N', '0', 'admin', '2020-10-17 18:19:48', '', NULL, '清空操作');
 INSERT INTO `sys_dict_data` VALUES (28, 1, '成功', '0', 'sys_common_status', '', 'primary', 'N', '0', 'admin', '2020-10-17 18:19:48', '', NULL, '正常状态');
 INSERT INTO `sys_dict_data` VALUES (29, 2, '失败', '1', 'sys_common_status', '', 'danger', 'N', '0', 'admin', '2020-10-17 18:19:48', '', NULL, '停用状态');
+INSERT INTO `sys_dict_data` VALUES (100, 1, '是', '0', 'blog_original', NULL, NULL, 'Y', '0', 'admin', '2020-10-19 22:42:51', '', NULL, '是原创');
+INSERT INTO `sys_dict_data` VALUES (101, 2, '否', '1', 'blog_original', NULL, NULL, 'Y', '0', 'admin', '2020-10-19 22:43:14', '', NULL, '不是原创');
+INSERT INTO `sys_dict_data` VALUES (102, 1, '说说', '0', 'blog_article_label', NULL, NULL, 'Y', '0', 'admin', '2020-10-19 22:44:14', '', NULL, '文章类型：说说');
+INSERT INTO `sys_dict_data` VALUES (103, 2, '吐槽', '1', 'blog_article_label', NULL, NULL, 'Y', '0', 'admin', '2020-10-19 22:44:42', '', NULL, '文章类型：吐槽');
+INSERT INTO `sys_dict_data` VALUES (104, 3, '美文', '2', 'blog_article_label', NULL, NULL, 'Y', '0', 'admin', '2020-10-19 22:45:27', '', NULL, '文章类型：美文');
+INSERT INTO `sys_dict_data` VALUES (105, 4, '知识', '3', 'blog_article_label', NULL, NULL, 'Y', '0', 'admin', '2020-10-19 22:46:19', '', NULL, '文章类型：知识');
+INSERT INTO `sys_dict_data` VALUES (106, 5, '八卦', '4', 'blog_article_label', NULL, NULL, 'Y', '0', 'admin', '2020-10-19 22:46:40', '', NULL, '文章类型：八卦');
 
 -- ----------------------------
 -- Table structure for sys_dict_type
@@ -561,7 +633,7 @@ CREATE TABLE `sys_dict_type`  (
   `remark` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`dict_id`) USING BTREE,
   UNIQUE INDEX `dict_type`(`dict_type`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '字典类型表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 102 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '字典类型表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_dict_type
@@ -576,6 +648,8 @@ INSERT INTO `sys_dict_type` VALUES (7, '通知类型', 'sys_notice_type', '0', '
 INSERT INTO `sys_dict_type` VALUES (8, '通知状态', 'sys_notice_status', '0', 'admin', '2020-10-17 18:19:48', '', NULL, '通知状态列表');
 INSERT INTO `sys_dict_type` VALUES (9, '操作类型', 'sys_oper_type', '0', 'admin', '2020-10-17 18:19:48', '', NULL, '操作类型列表');
 INSERT INTO `sys_dict_type` VALUES (10, '系统状态', 'sys_common_status', '0', 'admin', '2020-10-17 18:19:48', '', NULL, '登录状态列表');
+INSERT INTO `sys_dict_type` VALUES (100, '标签类型', 'blog_article_label', '0', 'admin', '2020-10-19 22:30:52', '', NULL, '文章标签类型选择');
+INSERT INTO `sys_dict_type` VALUES (101, '是否原创', 'blog_original', '0', 'admin', '2020-10-19 22:34:25', '', NULL, '文章是否原创');
 
 -- ----------------------------
 -- Table structure for sys_job
@@ -596,7 +670,7 @@ CREATE TABLE `sys_job`  (
   `update_time` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',
   `remark` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '备注信息',
   PRIMARY KEY (`job_id`, `job_name`, `job_group`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '定时任务调度表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 100 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '定时任务调度表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_job
@@ -636,12 +710,19 @@ CREATE TABLE `sys_logininfor`  (
   `msg` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '提示消息',
   `login_time` datetime(0) NULL DEFAULT NULL COMMENT '访问时间',
   PRIMARY KEY (`info_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 100 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '系统访问记录' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 108 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '系统访问记录' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_logininfor
 -- ----------------------------
 INSERT INTO `sys_logininfor` VALUES (100, 'admin', '127.0.0.1', '内网IP', 'Chrome 8', 'Windows 10', '0', '登录成功', '2020-10-17 18:22:27');
+INSERT INTO `sys_logininfor` VALUES (101, 'admin', '127.0.0.1', '内网IP', 'Chrome 8', 'Windows 10', '0', '退出成功', '2020-10-19 14:58:03');
+INSERT INTO `sys_logininfor` VALUES (102, 'admin', '127.0.0.1', '内网IP', 'Chrome 8', 'Windows 10', '0', '登录成功', '2020-10-19 14:58:09');
+INSERT INTO `sys_logininfor` VALUES (103, 'admin', '127.0.0.1', '内网IP', 'Chrome 8', 'Windows 10', '0', '退出成功', '2020-10-19 15:11:21');
+INSERT INTO `sys_logininfor` VALUES (104, 'admin', '127.0.0.1', '内网IP', 'Chrome 8', 'Windows 10', '1', '验证码错误', '2020-10-19 15:13:00');
+INSERT INTO `sys_logininfor` VALUES (105, 'admin', '127.0.0.1', '内网IP', 'Chrome 8', 'Windows 10', '1', '密码输入错误1次', '2020-10-19 15:13:08');
+INSERT INTO `sys_logininfor` VALUES (106, 'admin', '127.0.0.1', '内网IP', 'Chrome 8', 'Windows 10', '0', '登录成功', '2020-10-19 22:07:00');
+INSERT INTO `sys_logininfor` VALUES (107, 'admin', '127.0.0.1', '内网IP', 'Chrome 8', 'Windows 10', '0', '登录成功', '2020-10-20 15:52:09');
 
 -- ----------------------------
 -- Table structure for sys_menu
@@ -664,7 +745,7 @@ CREATE TABLE `sys_menu`  (
   `update_time` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',
   `remark` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '备注',
   PRIMARY KEY (`menu_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1061 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '菜单权限表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 2000 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '菜单权限表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_menu
@@ -800,7 +881,32 @@ CREATE TABLE `sys_oper_log`  (
   `error_msg` varchar(2000) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '错误消息',
   `oper_time` datetime(0) NULL DEFAULT NULL COMMENT '操作时间',
   PRIMARY KEY (`oper_id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '操作日志记录' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 121 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '操作日志记录' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of sys_oper_log
+-- ----------------------------
+INSERT INTO `sys_oper_log` VALUES (100, '代码生成', 6, 'com.ruoyi.generator.controller.GenController.importTableSave()', 'POST', 1, 'admin', '研发部门', '/tool/gen/importTable', '127.0.0.1', '内网IP', '{\"tables\":[\"blog_attention,blog_link,blog_like,blog_collect,blog_article_label,blog_feedback,blog_comment_reply,blog_article_info,blog_user_info\"]}', '{\r\n  \"msg\" : \"操作成功\",\r\n  \"code\" : 0\r\n}', 0, NULL, '2020-10-19 22:18:07');
+INSERT INTO `sys_oper_log` VALUES (101, '字典类型', 1, 'com.ruoyi.web.controller.system.SysDictTypeController.addSave()', 'POST', 1, 'admin', '研发部门', '/system/dict/add', '127.0.0.1', '内网IP', '{\"dictName\":[\"标签类型\"],\"dictType\":[\"blog_article_label\"],\"status\":[\"0\"],\"remark\":[\"文章标签类型选择\"]}', '{\r\n  \"msg\" : \"操作成功\",\r\n  \"code\" : 0\r\n}', 0, NULL, '2020-10-19 22:30:52');
+INSERT INTO `sys_oper_log` VALUES (102, '代码生成', 2, 'com.ruoyi.generator.controller.GenController.editSave()', 'POST', 1, 'admin', '研发部门', '/tool/gen/edit', '127.0.0.1', '内网IP', '{\"tableId\":[\"2\"],\"tableName\":[\"blog_article_label\"],\"tableComment\":[\"文章标签表\"],\"className\":[\"BlogArticleLabel\"],\"functionAuthor\":[\"ruoyi\"],\"remark\":[\"\"],\"columns[0].columnId\":[\"14\"],\"columns[0].sort\":[\"1\"],\"columns[0].columnComment\":[\"主键\"],\"columns[0].javaType\":[\"Long\"],\"columns[0].javaField\":[\"labelId\"],\"columns[0].isInsert\":[\"1\"],\"columns[0].queryType\":[\"EQ\"],\"columns[0].htmlType\":[\"input\"],\"columns[0].dictType\":[\"\"],\"columns[1].columnId\":[\"15\"],\"columns[1].sort\":[\"2\"],\"columns[1].columnComment\":[\"标签名称\"],\"columns[1].javaType\":[\"String\"],\"columns[1].javaField\":[\"labelName\"],\"columns[1].isInsert\":[\"1\"],\"columns[1].isEdit\":[\"1\"],\"columns[1].isList\":[\"1\"],\"columns[1].isQuery\":[\"1\"],\"columns[1].queryType\":[\"LIKE\"],\"columns[1].isRequired\":[\"1\"],\"columns[1].htmlType\":[\"input\"],\"columns[1].dictType\":[\"blog_article_label\"],\"columns[2].columnId\":[\"16\"],\"columns[2].sort\":[\"3\"],\"columns[2].columnComment\":[\"标签码\"],\"columns[2].javaType\":[\"String\"],\"columns[2].javaField\":[\"labelCode\"],\"columns[2].isInsert\":[\"1\"],\"columns[2].isEdit\":[\"1\"],\"columns[2].isList\":[\"1\"],\"columns[2].isQuery\":[\"1\"],\"columns[2].queryType\":[\"EQ\"],\"columns[2].isRequired\":[\"1\"],\"columns[2].htmlType\":[\"input\"],\"columns[2].dictType\":[\"\"],\"columns[3].columnId\":[\"17\"],\"columns[3].sort\":[\"4\"],\"columns[3].columnComment\":[\"创建人\"],\"columns[3].javaType\":[\"String\"],\"columns[3].javaField\":[\"createUser\"],\"columns[3].isInsert\":[\"1\"],\"columns[3].isEdit\":[\"1\"],\"columns[3].isList\":[\"1\"],\"columns[3].isQuery\":[\"1\"],\"columns[3].queryType\":[\"EQ\"],\"columns[3].isRequired\":[\"1\"],\"columns[3].htmlType\":[\"input\"],\"columns[3].dictType\":[\"\"],\"columns[4].columnId\":[\"18\"],\"columns[4].sort\":[\"5\"],\"columns[4].columnComment\":[\"创建时间\"],\"columns[4].javaType\":[\"Date\"],\"columns[4].javaField\":[\"createTime\"],\"columns[4].isInsert\":[\"1\"],\"columns[4].queryType\":[\"EQ\"],\"columns[4].isRequired\":[\"1\"],\"columns[4].htmlType\":[\"datetime\"],\"columns[4].dictType\":[\"\"],\"columns[5].columnId\":[\"19\"],\"columns[5].sort\":[\"6\"],\"columns[5].columnComment\":[\"修改人\"],\"columns[', '{\r\n  \"msg\" : \"操作成功\",\r\n  \"code\" : 0\r\n}', 0, NULL, '2020-10-19 22:32:52');
+INSERT INTO `sys_oper_log` VALUES (103, '字典类型', 1, 'com.ruoyi.web.controller.system.SysDictTypeController.addSave()', 'POST', 1, 'admin', '研发部门', '/system/dict/add', '127.0.0.1', '内网IP', '{\"dictName\":[\"是否原创\"],\"dictType\":[\"blog_original\"],\"status\":[\"0\"],\"remark\":[\"文章是否原创\"]}', '{\r\n  \"msg\" : \"操作成功\",\r\n  \"code\" : 0\r\n}', 0, NULL, '2020-10-19 22:34:25');
+INSERT INTO `sys_oper_log` VALUES (104, '代码生成', 2, 'com.ruoyi.generator.controller.GenController.editSave()', 'POST', 1, 'admin', '研发部门', '/tool/gen/edit', '127.0.0.1', '内网IP', '{\"tableId\":[\"1\"],\"tableName\":[\"blog_article_info\"],\"tableComment\":[\"文章内容信息表\"],\"className\":[\"BlogArticleInfo\"],\"functionAuthor\":[\"ruoyi\"],\"remark\":[\"\"],\"columns[0].columnId\":[\"1\"],\"columns[0].sort\":[\"1\"],\"columns[0].columnComment\":[\"文章id\"],\"columns[0].javaType\":[\"Long\"],\"columns[0].javaField\":[\"articleId\"],\"columns[0].isInsert\":[\"1\"],\"columns[0].queryType\":[\"EQ\"],\"columns[0].htmlType\":[\"input\"],\"columns[0].dictType\":[\"\"],\"columns[1].columnId\":[\"2\"],\"columns[1].sort\":[\"2\"],\"columns[1].columnComment\":[\"文章所属用户id\"],\"columns[1].javaType\":[\"Long\"],\"columns[1].javaField\":[\"articleUserId\"],\"columns[1].isInsert\":[\"1\"],\"columns[1].isEdit\":[\"1\"],\"columns[1].isList\":[\"1\"],\"columns[1].isQuery\":[\"1\"],\"columns[1].queryType\":[\"EQ\"],\"columns[1].isRequired\":[\"1\"],\"columns[1].htmlType\":[\"input\"],\"columns[1].dictType\":[\"\"],\"columns[2].columnId\":[\"3\"],\"columns[2].sort\":[\"3\"],\"columns[2].columnComment\":[\"文章名称\"],\"columns[2].javaType\":[\"String\"],\"columns[2].javaField\":[\"articleName\"],\"columns[2].isInsert\":[\"1\"],\"columns[2].isEdit\":[\"1\"],\"columns[2].isList\":[\"1\"],\"columns[2].isQuery\":[\"1\"],\"columns[2].queryType\":[\"LIKE\"],\"columns[2].isRequired\":[\"1\"],\"columns[2].htmlType\":[\"input\"],\"columns[2].dictType\":[\"\"],\"columns[3].columnId\":[\"4\"],\"columns[3].sort\":[\"4\"],\"columns[3].columnComment\":[\"文章标签\"],\"columns[3].javaType\":[\"String\"],\"columns[3].javaField\":[\"articleLabel\"],\"columns[3].isInsert\":[\"1\"],\"columns[3].isEdit\":[\"1\"],\"columns[3].isList\":[\"1\"],\"columns[3].isQuery\":[\"1\"],\"columns[3].queryType\":[\"EQ\"],\"columns[3].isRequired\":[\"1\"],\"columns[3].htmlType\":[\"input\"],\"columns[3].dictType\":[\"\"],\"columns[4].columnId\":[\"5\"],\"columns[4].sort\":[\"5\"],\"columns[4].columnComment\":[\"文章摘要\"],\"columns[4].javaType\":[\"String\"],\"columns[4].javaField\":[\"articleAbstract\"],\"columns[4].isInsert\":[\"1\"],\"columns[4].isEdit\":[\"1\"],\"columns[4].isList\":[\"1\"],\"columns[4].isQuery\":[\"1\"],\"columns[4].queryType\":[\"EQ\"],\"columns[4].isRequired\":[\"1\"],\"columns[4].htmlType\":[\"input\"],\"columns[4].dictType\":[\"\"],\"columns[5].columnId\"', '{\r\n  \"msg\" : \"操作成功\",\r\n  \"code\" : 0\r\n}', 0, NULL, '2020-10-19 22:35:05');
+INSERT INTO `sys_oper_log` VALUES (105, '代码生成', 2, 'com.ruoyi.generator.controller.GenController.editSave()', 'POST', 1, 'admin', '研发部门', '/tool/gen/edit', '127.0.0.1', '内网IP', '{\"tableId\":[\"2\"],\"tableName\":[\"blog_article_label\"],\"tableComment\":[\"文章标签表\"],\"className\":[\"BlogArticleLabel\"],\"functionAuthor\":[\"ruoyi\"],\"remark\":[\"\"],\"columns[0].columnId\":[\"14\"],\"columns[0].sort\":[\"1\"],\"columns[0].columnComment\":[\"主键\"],\"columns[0].javaType\":[\"Long\"],\"columns[0].javaField\":[\"labelId\"],\"columns[0].isInsert\":[\"1\"],\"columns[0].queryType\":[\"EQ\"],\"columns[0].htmlType\":[\"input\"],\"columns[0].dictType\":[\"\"],\"columns[1].columnId\":[\"15\"],\"columns[1].sort\":[\"2\"],\"columns[1].columnComment\":[\"标签名称\"],\"columns[1].javaType\":[\"String\"],\"columns[1].javaField\":[\"labelName\"],\"columns[1].isInsert\":[\"1\"],\"columns[1].isEdit\":[\"1\"],\"columns[1].isList\":[\"1\"],\"columns[1].isQuery\":[\"1\"],\"columns[1].queryType\":[\"LIKE\"],\"columns[1].isRequired\":[\"1\"],\"columns[1].htmlType\":[\"select\"],\"columns[1].dictType\":[\"blog_article_label\"],\"columns[2].columnId\":[\"16\"],\"columns[2].sort\":[\"3\"],\"columns[2].columnComment\":[\"标签码\"],\"columns[2].javaType\":[\"String\"],\"columns[2].javaField\":[\"labelCode\"],\"columns[2].isInsert\":[\"1\"],\"columns[2].isEdit\":[\"1\"],\"columns[2].isList\":[\"1\"],\"columns[2].isQuery\":[\"1\"],\"columns[2].queryType\":[\"EQ\"],\"columns[2].isRequired\":[\"1\"],\"columns[2].htmlType\":[\"input\"],\"columns[2].dictType\":[\"\"],\"columns[3].columnId\":[\"17\"],\"columns[3].sort\":[\"4\"],\"columns[3].columnComment\":[\"创建人\"],\"columns[3].javaType\":[\"String\"],\"columns[3].javaField\":[\"createUser\"],\"columns[3].isInsert\":[\"1\"],\"columns[3].isEdit\":[\"1\"],\"columns[3].isList\":[\"1\"],\"columns[3].isQuery\":[\"1\"],\"columns[3].queryType\":[\"EQ\"],\"columns[3].isRequired\":[\"1\"],\"columns[3].htmlType\":[\"input\"],\"columns[3].dictType\":[\"\"],\"columns[4].columnId\":[\"18\"],\"columns[4].sort\":[\"5\"],\"columns[4].columnComment\":[\"创建时间\"],\"columns[4].javaType\":[\"Date\"],\"columns[4].javaField\":[\"createTime\"],\"columns[4].isInsert\":[\"1\"],\"columns[4].queryType\":[\"EQ\"],\"columns[4].isRequired\":[\"1\"],\"columns[4].htmlType\":[\"datetime\"],\"columns[4].dictType\":[\"\"],\"columns[5].columnId\":[\"19\"],\"columns[5].sort\":[\"6\"],\"columns[5].columnComment\":[\"修改人\"],\"columns', '{\r\n  \"msg\" : \"操作成功\",\r\n  \"code\" : 0\r\n}', 0, NULL, '2020-10-19 22:35:24');
+INSERT INTO `sys_oper_log` VALUES (106, '代码生成', 2, 'com.ruoyi.generator.controller.GenController.editSave()', 'POST', 1, 'admin', '研发部门', '/tool/gen/edit', '127.0.0.1', '内网IP', '{\"tableId\":[\"1\"],\"tableName\":[\"blog_article_info\"],\"tableComment\":[\"文章内容信息表\"],\"className\":[\"BlogArticleInfo\"],\"functionAuthor\":[\"ruoyi\"],\"remark\":[\"\"],\"columns[0].columnId\":[\"1\"],\"columns[0].sort\":[\"1\"],\"columns[0].columnComment\":[\"文章id\"],\"columns[0].javaType\":[\"Long\"],\"columns[0].javaField\":[\"articleId\"],\"columns[0].isInsert\":[\"1\"],\"columns[0].queryType\":[\"EQ\"],\"columns[0].htmlType\":[\"input\"],\"columns[0].dictType\":[\"\"],\"columns[1].columnId\":[\"2\"],\"columns[1].sort\":[\"2\"],\"columns[1].columnComment\":[\"文章所属用户id\"],\"columns[1].javaType\":[\"Long\"],\"columns[1].javaField\":[\"articleUserId\"],\"columns[1].isInsert\":[\"1\"],\"columns[1].isEdit\":[\"1\"],\"columns[1].isList\":[\"1\"],\"columns[1].isQuery\":[\"1\"],\"columns[1].queryType\":[\"EQ\"],\"columns[1].isRequired\":[\"1\"],\"columns[1].htmlType\":[\"input\"],\"columns[1].dictType\":[\"\"],\"columns[2].columnId\":[\"3\"],\"columns[2].sort\":[\"3\"],\"columns[2].columnComment\":[\"文章名称\"],\"columns[2].javaType\":[\"String\"],\"columns[2].javaField\":[\"articleName\"],\"columns[2].isInsert\":[\"1\"],\"columns[2].isEdit\":[\"1\"],\"columns[2].isList\":[\"1\"],\"columns[2].isQuery\":[\"1\"],\"columns[2].queryType\":[\"LIKE\"],\"columns[2].isRequired\":[\"1\"],\"columns[2].htmlType\":[\"input\"],\"columns[2].dictType\":[\"\"],\"columns[3].columnId\":[\"4\"],\"columns[3].sort\":[\"4\"],\"columns[3].columnComment\":[\"文章标签\"],\"columns[3].javaType\":[\"String\"],\"columns[3].javaField\":[\"articleLabel\"],\"columns[3].isInsert\":[\"1\"],\"columns[3].isEdit\":[\"1\"],\"columns[3].isList\":[\"1\"],\"columns[3].isQuery\":[\"1\"],\"columns[3].queryType\":[\"EQ\"],\"columns[3].isRequired\":[\"1\"],\"columns[3].htmlType\":[\"select\"],\"columns[3].dictType\":[\"blog_article_label\"],\"columns[4].columnId\":[\"5\"],\"columns[4].sort\":[\"5\"],\"columns[4].columnComment\":[\"文章摘要\"],\"columns[4].javaType\":[\"String\"],\"columns[4].javaField\":[\"articleAbstract\"],\"columns[4].isInsert\":[\"1\"],\"columns[4].isEdit\":[\"1\"],\"columns[4].isList\":[\"1\"],\"columns[4].isQuery\":[\"1\"],\"columns[4].queryType\":[\"EQ\"],\"columns[4].isRequired\":[\"1\"],\"columns[4].htmlType\":[\"input\"],\"columns[4].dictType\":[\"\"],\"c', '{\r\n  \"msg\" : \"操作成功\",\r\n  \"code\" : 0\r\n}', 0, NULL, '2020-10-19 22:37:01');
+INSERT INTO `sys_oper_log` VALUES (107, '字典数据', 1, 'com.ruoyi.web.controller.system.SysDictDataController.addSave()', 'POST', 1, 'admin', '研发部门', '/system/dict/data/add', '127.0.0.1', '内网IP', '{\"dictLabel\":[\"是\"],\"dictValue\":[\"0\"],\"dictType\":[\"blog_original\"],\"cssClass\":[\"\"],\"dictSort\":[\"1\"],\"listClass\":[\"\"],\"isDefault\":[\"Y\"],\"status\":[\"0\"],\"remark\":[\"是原创\"]}', '{\r\n  \"msg\" : \"操作成功\",\r\n  \"code\" : 0\r\n}', 0, NULL, '2020-10-19 22:42:51');
+INSERT INTO `sys_oper_log` VALUES (108, '字典数据', 1, 'com.ruoyi.web.controller.system.SysDictDataController.addSave()', 'POST', 1, 'admin', '研发部门', '/system/dict/data/add', '127.0.0.1', '内网IP', '{\"dictLabel\":[\"否\"],\"dictValue\":[\"1\"],\"dictType\":[\"blog_original\"],\"cssClass\":[\"\"],\"dictSort\":[\"2\"],\"listClass\":[\"\"],\"isDefault\":[\"Y\"],\"status\":[\"0\"],\"remark\":[\"不是原创\"]}', '{\r\n  \"msg\" : \"操作成功\",\r\n  \"code\" : 0\r\n}', 0, NULL, '2020-10-19 22:43:14');
+INSERT INTO `sys_oper_log` VALUES (109, '字典数据', 1, 'com.ruoyi.web.controller.system.SysDictDataController.addSave()', 'POST', 1, 'admin', '研发部门', '/system/dict/data/add', '127.0.0.1', '内网IP', '{\"dictLabel\":[\"说说\"],\"dictValue\":[\"0\"],\"dictType\":[\"blog_article_label\"],\"cssClass\":[\"\"],\"dictSort\":[\"1\"],\"listClass\":[\"\"],\"isDefault\":[\"Y\"],\"status\":[\"0\"],\"remark\":[\"文章类型：说说\"]}', '{\r\n  \"msg\" : \"操作成功\",\r\n  \"code\" : 0\r\n}', 0, NULL, '2020-10-19 22:44:14');
+INSERT INTO `sys_oper_log` VALUES (110, '字典数据', 1, 'com.ruoyi.web.controller.system.SysDictDataController.addSave()', 'POST', 1, 'admin', '研发部门', '/system/dict/data/add', '127.0.0.1', '内网IP', '{\"dictLabel\":[\"吐槽\"],\"dictValue\":[\"1\"],\"dictType\":[\"blog_article_label\"],\"cssClass\":[\"\"],\"dictSort\":[\"2\"],\"listClass\":[\"\"],\"isDefault\":[\"Y\"],\"status\":[\"0\"],\"remark\":[\"文章类型：吐槽\"]}', '{\r\n  \"msg\" : \"操作成功\",\r\n  \"code\" : 0\r\n}', 0, NULL, '2020-10-19 22:44:42');
+INSERT INTO `sys_oper_log` VALUES (111, '字典数据', 1, 'com.ruoyi.web.controller.system.SysDictDataController.addSave()', 'POST', 1, 'admin', '研发部门', '/system/dict/data/add', '127.0.0.1', '内网IP', '{\"dictLabel\":[\"美文\"],\"dictValue\":[\"2\"],\"dictType\":[\"blog_article_label\"],\"cssClass\":[\"\"],\"dictSort\":[\"3\"],\"listClass\":[\"\"],\"isDefault\":[\"Y\"],\"status\":[\"0\"],\"remark\":[\"文章类型：美文\"]}', '{\r\n  \"msg\" : \"操作成功\",\r\n  \"code\" : 0\r\n}', 0, NULL, '2020-10-19 22:45:27');
+INSERT INTO `sys_oper_log` VALUES (112, '字典数据', 1, 'com.ruoyi.web.controller.system.SysDictDataController.addSave()', 'POST', 1, 'admin', '研发部门', '/system/dict/data/add', '127.0.0.1', '内网IP', '{\"dictLabel\":[\"知识\"],\"dictValue\":[\"3\"],\"dictType\":[\"blog_article_label\"],\"cssClass\":[\"\"],\"dictSort\":[\"4\"],\"listClass\":[\"\"],\"isDefault\":[\"Y\"],\"status\":[\"0\"],\"remark\":[\"文章类型：知识\"]}', '{\r\n  \"msg\" : \"操作成功\",\r\n  \"code\" : 0\r\n}', 0, NULL, '2020-10-19 22:46:19');
+INSERT INTO `sys_oper_log` VALUES (113, '字典数据', 1, 'com.ruoyi.web.controller.system.SysDictDataController.addSave()', 'POST', 1, 'admin', '研发部门', '/system/dict/data/add', '127.0.0.1', '内网IP', '{\"dictLabel\":[\"八卦\"],\"dictValue\":[\"4\"],\"dictType\":[\"blog_article_label\"],\"cssClass\":[\"\"],\"dictSort\":[\"5\"],\"listClass\":[\"\"],\"isDefault\":[\"Y\"],\"status\":[\"0\"],\"remark\":[\"文章类型：八卦\"]}', '{\r\n  \"msg\" : \"操作成功\",\r\n  \"code\" : 0\r\n}', 0, NULL, '2020-10-19 22:46:40');
+INSERT INTO `sys_oper_log` VALUES (114, '代码生成', 2, 'com.ruoyi.generator.controller.GenController.editSave()', 'POST', 1, 'admin', '研发部门', '/tool/gen/edit', '127.0.0.1', '内网IP', '{\"tableId\":[\"9\"],\"tableName\":[\"blog_user_info\"],\"tableComment\":[\"博主信息表\"],\"className\":[\"BlogUserInfo\"],\"functionAuthor\":[\"ruoyi\"],\"remark\":[\"\"],\"columns[0].columnId\":[\"57\"],\"columns[0].sort\":[\"1\"],\"columns[0].columnComment\":[\"博主ID\"],\"columns[0].javaType\":[\"Long\"],\"columns[0].javaField\":[\"userId\"],\"columns[0].isInsert\":[\"1\"],\"columns[0].queryType\":[\"EQ\"],\"columns[0].htmlType\":[\"input\"],\"columns[0].dictType\":[\"\"],\"columns[1].columnId\":[\"58\"],\"columns[1].sort\":[\"2\"],\"columns[1].columnComment\":[\"用户名\"],\"columns[1].javaType\":[\"String\"],\"columns[1].javaField\":[\"blogUsername\"],\"columns[1].isInsert\":[\"1\"],\"columns[1].isEdit\":[\"1\"],\"columns[1].isList\":[\"1\"],\"columns[1].isQuery\":[\"1\"],\"columns[1].queryType\":[\"LIKE\"],\"columns[1].isRequired\":[\"1\"],\"columns[1].htmlType\":[\"input\"],\"columns[1].dictType\":[\"\"],\"columns[2].columnId\":[\"59\"],\"columns[2].sort\":[\"3\"],\"columns[2].columnComment\":[\"用户密码\"],\"columns[2].javaType\":[\"String\"],\"columns[2].javaField\":[\"blogPassword\"],\"columns[2].isInsert\":[\"1\"],\"columns[2].isEdit\":[\"1\"],\"columns[2].isList\":[\"1\"],\"columns[2].isQuery\":[\"1\"],\"columns[2].queryType\":[\"EQ\"],\"columns[2].isRequired\":[\"1\"],\"columns[2].htmlType\":[\"input\"],\"columns[2].dictType\":[\"\"],\"columns[3].columnId\":[\"60\"],\"columns[3].sort\":[\"4\"],\"columns[3].columnComment\":[\"用户昵称\"],\"columns[3].javaType\":[\"String\"],\"columns[3].javaField\":[\"blogNickname\"],\"columns[3].isInsert\":[\"1\"],\"columns[3].isEdit\":[\"1\"],\"columns[3].isList\":[\"1\"],\"columns[3].isQuery\":[\"1\"],\"columns[3].queryType\":[\"LIKE\"],\"columns[3].isRequired\":[\"1\"],\"columns[3].htmlType\":[\"input\"],\"columns[3].dictType\":[\"\"],\"columns[4].columnId\":[\"61\"],\"columns[4].sort\":[\"5\"],\"columns[4].columnComment\":[\"用户性别\"],\"columns[4].javaType\":[\"String\"],\"columns[4].javaField\":[\"blogSex\"],\"columns[4].isInsert\":[\"1\"],\"columns[4].isEdit\":[\"1\"],\"columns[4].isList\":[\"1\"],\"columns[4].isQuery\":[\"1\"],\"columns[4].queryType\":[\"EQ\"],\"columns[4].isRequired\":[\"1\"],\"columns[4].htmlType\":[\"select\"],\"columns[4].dictType\":[\"sys_user_sex\"],\"columns[5].columnId\":[', '{\r\n  \"msg\" : \"操作成功\",\r\n  \"code\" : 0\r\n}', 0, NULL, '2020-10-19 22:50:09');
+INSERT INTO `sys_oper_log` VALUES (115, '代码生成', 3, 'com.ruoyi.generator.controller.GenController.remove()', 'POST', 1, 'admin', '研发部门', '/tool/gen/remove', '127.0.0.1', '内网IP', '{\"ids\":[\"2\"]}', '{\r\n  \"msg\" : \"操作成功\",\r\n  \"code\" : 0\r\n}', 0, NULL, '2020-10-19 22:52:38');
+INSERT INTO `sys_oper_log` VALUES (116, '代码生成', 2, 'com.ruoyi.generator.controller.GenController.editSave()', 'POST', 1, 'admin', '研发部门', '/tool/gen/edit', '127.0.0.1', '内网IP', '{\"tableId\":[\"9\"],\"tableName\":[\"blog_user_info\"],\"tableComment\":[\"博主信息表\"],\"className\":[\"BlogUserInfo\"],\"functionAuthor\":[\"ruoyi\"],\"remark\":[\"\"],\"columns[0].columnId\":[\"57\"],\"columns[0].sort\":[\"1\"],\"columns[0].columnComment\":[\"博主ID\"],\"columns[0].javaType\":[\"Long\"],\"columns[0].javaField\":[\"userId\"],\"columns[0].isInsert\":[\"1\"],\"columns[0].queryType\":[\"EQ\"],\"columns[0].isRequired\":[\"1\"],\"columns[0].htmlType\":[\"input\"],\"columns[0].dictType\":[\"\"],\"columns[1].columnId\":[\"58\"],\"columns[1].sort\":[\"2\"],\"columns[1].columnComment\":[\"用户名\"],\"columns[1].javaType\":[\"String\"],\"columns[1].javaField\":[\"blogUsername\"],\"columns[1].isInsert\":[\"1\"],\"columns[1].isEdit\":[\"1\"],\"columns[1].isList\":[\"1\"],\"columns[1].isQuery\":[\"1\"],\"columns[1].queryType\":[\"LIKE\"],\"columns[1].isRequired\":[\"1\"],\"columns[1].htmlType\":[\"input\"],\"columns[1].dictType\":[\"\"],\"columns[2].columnId\":[\"59\"],\"columns[2].sort\":[\"3\"],\"columns[2].columnComment\":[\"用户密码\"],\"columns[2].javaType\":[\"String\"],\"columns[2].javaField\":[\"blogPassword\"],\"columns[2].isInsert\":[\"1\"],\"columns[2].isEdit\":[\"1\"],\"columns[2].isList\":[\"1\"],\"columns[2].isQuery\":[\"1\"],\"columns[2].queryType\":[\"EQ\"],\"columns[2].isRequired\":[\"1\"],\"columns[2].htmlType\":[\"input\"],\"columns[2].dictType\":[\"\"],\"columns[3].columnId\":[\"60\"],\"columns[3].sort\":[\"4\"],\"columns[3].columnComment\":[\"用户昵称\"],\"columns[3].javaType\":[\"String\"],\"columns[3].javaField\":[\"blogNickname\"],\"columns[3].isInsert\":[\"1\"],\"columns[3].isEdit\":[\"1\"],\"columns[3].isList\":[\"1\"],\"columns[3].isQuery\":[\"1\"],\"columns[3].queryType\":[\"LIKE\"],\"columns[3].isRequired\":[\"1\"],\"columns[3].htmlType\":[\"input\"],\"columns[3].dictType\":[\"\"],\"columns[4].columnId\":[\"61\"],\"columns[4].sort\":[\"5\"],\"columns[4].columnComment\":[\"用户性别\"],\"columns[4].javaType\":[\"String\"],\"columns[4].javaField\":[\"blogSex\"],\"columns[4].isInsert\":[\"1\"],\"columns[4].isEdit\":[\"1\"],\"columns[4].isList\":[\"1\"],\"columns[4].isQuery\":[\"1\"],\"columns[4].queryType\":[\"EQ\"],\"columns[4].isRequired\":[\"1\"],\"columns[4].htmlType\":[\"select\"],\"columns[4].dictType\":[\"sys_user', '{\r\n  \"msg\" : \"操作成功\",\r\n  \"code\" : 0\r\n}', 0, NULL, '2020-10-19 22:53:21');
+INSERT INTO `sys_oper_log` VALUES (117, '代码生成', 2, 'com.ruoyi.generator.controller.GenController.editSave()', 'POST', 1, 'admin', '研发部门', '/tool/gen/edit', '127.0.0.1', '内网IP', '{\"tableId\":[\"9\"],\"tableName\":[\"blog_user_info\"],\"tableComment\":[\"博主信息表\"],\"className\":[\"BlogUserInfo\"],\"functionAuthor\":[\"ruoyi\"],\"remark\":[\"\"],\"columns[0].columnId\":[\"57\"],\"columns[0].sort\":[\"1\"],\"columns[0].columnComment\":[\"博主ID\"],\"columns[0].javaType\":[\"Long\"],\"columns[0].javaField\":[\"userId\"],\"columns[0].isInsert\":[\"1\"],\"columns[0].queryType\":[\"EQ\"],\"columns[0].htmlType\":[\"input\"],\"columns[0].dictType\":[\"\"],\"columns[1].columnId\":[\"58\"],\"columns[1].sort\":[\"2\"],\"columns[1].columnComment\":[\"用户名\"],\"columns[1].javaType\":[\"String\"],\"columns[1].javaField\":[\"blogUsername\"],\"columns[1].isInsert\":[\"1\"],\"columns[1].isEdit\":[\"1\"],\"columns[1].isList\":[\"1\"],\"columns[1].isQuery\":[\"1\"],\"columns[1].queryType\":[\"LIKE\"],\"columns[1].isRequired\":[\"1\"],\"columns[1].htmlType\":[\"input\"],\"columns[1].dictType\":[\"\"],\"columns[2].columnId\":[\"59\"],\"columns[2].sort\":[\"3\"],\"columns[2].columnComment\":[\"用户密码\"],\"columns[2].javaType\":[\"String\"],\"columns[2].javaField\":[\"blogPassword\"],\"columns[2].isInsert\":[\"1\"],\"columns[2].isEdit\":[\"1\"],\"columns[2].isList\":[\"1\"],\"columns[2].isQuery\":[\"1\"],\"columns[2].queryType\":[\"EQ\"],\"columns[2].isRequired\":[\"1\"],\"columns[2].htmlType\":[\"input\"],\"columns[2].dictType\":[\"\"],\"columns[3].columnId\":[\"60\"],\"columns[3].sort\":[\"4\"],\"columns[3].columnComment\":[\"用户昵称\"],\"columns[3].javaType\":[\"String\"],\"columns[3].javaField\":[\"blogNickname\"],\"columns[3].isInsert\":[\"1\"],\"columns[3].isEdit\":[\"1\"],\"columns[3].isList\":[\"1\"],\"columns[3].isQuery\":[\"1\"],\"columns[3].queryType\":[\"LIKE\"],\"columns[3].isRequired\":[\"1\"],\"columns[3].htmlType\":[\"input\"],\"columns[3].dictType\":[\"\"],\"columns[4].columnId\":[\"61\"],\"columns[4].sort\":[\"5\"],\"columns[4].columnComment\":[\"用户性别\"],\"columns[4].javaType\":[\"String\"],\"columns[4].javaField\":[\"blogSex\"],\"columns[4].isInsert\":[\"1\"],\"columns[4].isEdit\":[\"1\"],\"columns[4].isList\":[\"1\"],\"columns[4].isQuery\":[\"1\"],\"columns[4].queryType\":[\"EQ\"],\"columns[4].isRequired\":[\"1\"],\"columns[4].htmlType\":[\"select\"],\"columns[4].dictType\":[\"sys_user_sex\"],\"columns[5].columnId\":[', '{\r\n  \"msg\" : \"操作成功\",\r\n  \"code\" : 0\r\n}', 0, NULL, '2020-10-19 22:53:44');
+INSERT INTO `sys_oper_log` VALUES (118, '代码生成', 2, 'com.ruoyi.generator.controller.GenController.editSave()', 'POST', 1, 'admin', '研发部门', '/tool/gen/edit', '127.0.0.1', '内网IP', '{\"tableId\":[\"1\"],\"tableName\":[\"blog_article_info\"],\"tableComment\":[\"文章内容信息表\"],\"className\":[\"BlogArticleInfo\"],\"functionAuthor\":[\"ruoyi\"],\"remark\":[\"\"],\"columns[0].columnId\":[\"1\"],\"columns[0].sort\":[\"1\"],\"columns[0].columnComment\":[\"文章id\"],\"columns[0].javaType\":[\"Long\"],\"columns[0].javaField\":[\"articleId\"],\"columns[0].isInsert\":[\"1\"],\"columns[0].queryType\":[\"EQ\"],\"columns[0].htmlType\":[\"input\"],\"columns[0].dictType\":[\"\"],\"columns[1].columnId\":[\"2\"],\"columns[1].sort\":[\"2\"],\"columns[1].columnComment\":[\"文章所属用户id\"],\"columns[1].javaType\":[\"Long\"],\"columns[1].javaField\":[\"articleUserId\"],\"columns[1].isInsert\":[\"1\"],\"columns[1].isEdit\":[\"1\"],\"columns[1].isList\":[\"1\"],\"columns[1].isQuery\":[\"1\"],\"columns[1].queryType\":[\"EQ\"],\"columns[1].isRequired\":[\"1\"],\"columns[1].htmlType\":[\"input\"],\"columns[1].dictType\":[\"\"],\"columns[2].columnId\":[\"3\"],\"columns[2].sort\":[\"3\"],\"columns[2].columnComment\":[\"文章名称\"],\"columns[2].javaType\":[\"String\"],\"columns[2].javaField\":[\"articleName\"],\"columns[2].isInsert\":[\"1\"],\"columns[2].isEdit\":[\"1\"],\"columns[2].isList\":[\"1\"],\"columns[2].isQuery\":[\"1\"],\"columns[2].queryType\":[\"LIKE\"],\"columns[2].isRequired\":[\"1\"],\"columns[2].htmlType\":[\"input\"],\"columns[2].dictType\":[\"\"],\"columns[3].columnId\":[\"4\"],\"columns[3].sort\":[\"4\"],\"columns[3].columnComment\":[\"文章标签\"],\"columns[3].javaType\":[\"String\"],\"columns[3].javaField\":[\"articleLabel\"],\"columns[3].isInsert\":[\"1\"],\"columns[3].isEdit\":[\"1\"],\"columns[3].isList\":[\"1\"],\"columns[3].isQuery\":[\"1\"],\"columns[3].queryType\":[\"LIKE\"],\"columns[3].isRequired\":[\"1\"],\"columns[3].htmlType\":[\"select\"],\"columns[3].dictType\":[\"blog_article_label\"],\"columns[4].columnId\":[\"5\"],\"columns[4].sort\":[\"5\"],\"columns[4].columnComment\":[\"文章摘要\"],\"columns[4].javaType\":[\"String\"],\"columns[4].javaField\":[\"articleAbstract\"],\"columns[4].isInsert\":[\"1\"],\"columns[4].isEdit\":[\"1\"],\"columns[4].isList\":[\"1\"],\"columns[4].isQuery\":[\"1\"],\"columns[4].queryType\":[\"EQ\"],\"columns[4].isRequired\":[\"1\"],\"columns[4].htmlType\":[\"input\"],\"columns[4].dictType\":[\"\"],', '{\r\n  \"msg\" : \"操作成功\",\r\n  \"code\" : 0\r\n}', 0, NULL, '2020-10-19 23:03:18');
+INSERT INTO `sys_oper_log` VALUES (119, '代码生成', 2, 'com.ruoyi.generator.controller.GenController.editSave()', 'POST', 1, 'admin', '研发部门', '/tool/gen/edit', '127.0.0.1', '内网IP', '{\"tableId\":[\"1\"],\"tableName\":[\"blog_article_info\"],\"tableComment\":[\"文章内容信息表\"],\"className\":[\"BlogArticleInfo\"],\"functionAuthor\":[\"ruoyi\"],\"remark\":[\"\"],\"columns[0].columnId\":[\"1\"],\"columns[0].sort\":[\"1\"],\"columns[0].columnComment\":[\"文章id\"],\"columns[0].javaType\":[\"Long\"],\"columns[0].javaField\":[\"articleId\"],\"columns[0].isInsert\":[\"1\"],\"columns[0].queryType\":[\"EQ\"],\"columns[0].htmlType\":[\"input\"],\"columns[0].dictType\":[\"\"],\"columns[1].columnId\":[\"2\"],\"columns[1].sort\":[\"2\"],\"columns[1].columnComment\":[\"文章所属用户id\"],\"columns[1].javaType\":[\"Long\"],\"columns[1].javaField\":[\"articleUserId\"],\"columns[1].isInsert\":[\"1\"],\"columns[1].isEdit\":[\"1\"],\"columns[1].isList\":[\"1\"],\"columns[1].isQuery\":[\"1\"],\"columns[1].queryType\":[\"EQ\"],\"columns[1].isRequired\":[\"1\"],\"columns[1].htmlType\":[\"input\"],\"columns[1].dictType\":[\"\"],\"columns[2].columnId\":[\"3\"],\"columns[2].sort\":[\"3\"],\"columns[2].columnComment\":[\"文章名称\"],\"columns[2].javaType\":[\"String\"],\"columns[2].javaField\":[\"articleName\"],\"columns[2].isInsert\":[\"1\"],\"columns[2].isEdit\":[\"1\"],\"columns[2].isList\":[\"1\"],\"columns[2].isQuery\":[\"1\"],\"columns[2].queryType\":[\"LIKE\"],\"columns[2].isRequired\":[\"1\"],\"columns[2].htmlType\":[\"input\"],\"columns[2].dictType\":[\"\"],\"columns[3].columnId\":[\"4\"],\"columns[3].sort\":[\"4\"],\"columns[3].columnComment\":[\"文章标签\"],\"columns[3].javaType\":[\"String\"],\"columns[3].javaField\":[\"articleLabel\"],\"columns[3].isInsert\":[\"1\"],\"columns[3].isEdit\":[\"1\"],\"columns[3].isList\":[\"1\"],\"columns[3].isQuery\":[\"1\"],\"columns[3].queryType\":[\"EQ\"],\"columns[3].isRequired\":[\"1\"],\"columns[3].htmlType\":[\"select\"],\"columns[3].dictType\":[\"blog_article_label\"],\"columns[4].columnId\":[\"5\"],\"columns[4].sort\":[\"5\"],\"columns[4].columnComment\":[\"文章摘要\"],\"columns[4].javaType\":[\"String\"],\"columns[4].javaField\":[\"articleAbstract\"],\"columns[4].isInsert\":[\"1\"],\"columns[4].isEdit\":[\"1\"],\"columns[4].isList\":[\"1\"],\"columns[4].isQuery\":[\"1\"],\"columns[4].queryType\":[\"EQ\"],\"columns[4].isRequired\":[\"1\"],\"columns[4].htmlType\":[\"input\"],\"columns[4].dictType\":[\"\"],\"c', '{\r\n  \"msg\" : \"操作成功\",\r\n  \"code\" : 0\r\n}', 0, NULL, '2020-10-20 15:54:01');
+INSERT INTO `sys_oper_log` VALUES (120, '代码生成', 8, 'com.ruoyi.generator.controller.GenController.batchGenCode()', 'GET', 1, 'admin', '研发部门', '/tool/gen/batchGenCode', '127.0.0.1', '内网IP', '{\"tables\":[\"blog_article_info,blog_attention,blog_collect,blog_comment_reply,blog_feedback,blog_like,blog_link,blog_user_info\"]}', 'null', 0, NULL, '2020-10-20 15:54:17');
 
 -- ----------------------------
 -- Table structure for sys_post
@@ -846,7 +952,7 @@ CREATE TABLE `sys_role`  (
   `update_time` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',
   `remark` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`role_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '角色信息表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 100 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '角色信息表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_role
@@ -996,12 +1102,12 @@ CREATE TABLE `sys_user`  (
   `update_time` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',
   `remark` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`user_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '用户信息表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 100 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '用户信息表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_user
 -- ----------------------------
-INSERT INTO `sys_user` VALUES (1, 103, 'admin', '若依', '00', 'ry@163.com', '15888888888', '1', '', '29c67a30398638269fe600f73a054934', '111111', '0', '0', '127.0.0.1', '2020-10-17 18:22:28', '2020-10-17 18:19:47', 'admin', '2020-10-17 18:19:47', '', '2020-10-17 18:22:27', '管理员');
+INSERT INTO `sys_user` VALUES (1, 103, 'admin', '若依', '00', 'ry@163.com', '15888888888', '1', '', '29c67a30398638269fe600f73a054934', '111111', '0', '0', '127.0.0.1', '2020-10-20 15:52:10', '2020-10-17 18:19:47', 'admin', '2020-10-17 18:19:47', '', '2020-10-20 15:52:09', '管理员');
 INSERT INTO `sys_user` VALUES (2, 105, 'ry', '若依', '00', 'ry@qq.com', '15666666666', '1', '', '8e6d98b90472783cc73c17047ddccf36', '222222', '0', '0', '127.0.0.1', '2020-10-17 18:19:47', '2020-10-17 18:19:47', 'admin', '2020-10-17 18:19:47', '', NULL, '测试员');
 
 -- ----------------------------
@@ -1022,11 +1128,6 @@ CREATE TABLE `sys_user_online`  (
   `expire_time` int(5) NULL DEFAULT 0 COMMENT '超时时间，单位为分钟',
   PRIMARY KEY (`sessionId`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '在线用户记录' ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of sys_user_online
--- ----------------------------
-INSERT INTO `sys_user_online` VALUES ('797102ec-d403-4b25-beec-24b15efcbb5c', 'admin', '研发部门', '127.0.0.1', '内网IP', 'Chrome 8', 'Windows 10', 'on_line', '2020-10-17 18:22:20', '2020-10-17 18:22:28', 1800000);
 
 -- ----------------------------
 -- Table structure for sys_user_post
