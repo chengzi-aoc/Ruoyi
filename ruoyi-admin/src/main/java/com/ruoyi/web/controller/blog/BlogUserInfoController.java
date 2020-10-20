@@ -26,25 +26,25 @@ import com.ruoyi.common.core.page.TableDataInfo;
  * @date 2020-10-20
  */
 @Controller
-@RequestMapping("/blog/info")
+@RequestMapping("/blog/user")
 public class BlogUserInfoController extends BaseController
 {
-    private String prefix = "blog/info";
+    private String prefix = "blog/user";
 
     @Autowired
     private IBlogUserInfoService blogUserInfoService;
 
-    @RequiresPermissions("blog:info:view")
+    @RequiresPermissions("blog:user:view")
     @GetMapping()
     public String info()
     {
-        return prefix + "/info";
+        return prefix + "/user";
     }
 
     /**
      * 查询博主信息列表
      */
-    @RequiresPermissions("blog:info:list")
+    @RequiresPermissions("blog:user:list")
     @PostMapping("/list")
     @ResponseBody
     public TableDataInfo list(BlogUserInfo blogUserInfo)
@@ -57,7 +57,7 @@ public class BlogUserInfoController extends BaseController
     /**
      * 导出博主信息列表
      */
-    @RequiresPermissions("blog:info:export")
+    @RequiresPermissions("blog:user:export")
     @Log(title = "博主信息", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     @ResponseBody
@@ -65,7 +65,7 @@ public class BlogUserInfoController extends BaseController
     {
         List<BlogUserInfo> list = blogUserInfoService.selectBlogUserInfoList(blogUserInfo);
         ExcelUtil<BlogUserInfo> util = new ExcelUtil<BlogUserInfo>(BlogUserInfo.class);
-        return util.exportExcel(list, "info");
+        return util.exportExcel(list, "user");
     }
 
     /**
@@ -80,7 +80,7 @@ public class BlogUserInfoController extends BaseController
     /**
      * 新增保存博主信息
      */
-    @RequiresPermissions("blog:info:add")
+    @RequiresPermissions("blog:user:add")
     @Log(title = "博主信息", businessType = BusinessType.INSERT)
     @PostMapping("/add")
     @ResponseBody
@@ -103,7 +103,7 @@ public class BlogUserInfoController extends BaseController
     /**
      * 修改保存博主信息
      */
-    @RequiresPermissions("blog:info:edit")
+    @RequiresPermissions("blog:user:edit")
     @Log(title = "博主信息", businessType = BusinessType.UPDATE)
     @PostMapping("/edit")
     @ResponseBody
@@ -115,7 +115,7 @@ public class BlogUserInfoController extends BaseController
     /**
      * 删除博主信息
      */
-    @RequiresPermissions("blog:info:remove")
+    @RequiresPermissions("blog:user:remove")
     @Log(title = "博主信息", businessType = BusinessType.DELETE)
     @PostMapping( "/remove")
     @ResponseBody
