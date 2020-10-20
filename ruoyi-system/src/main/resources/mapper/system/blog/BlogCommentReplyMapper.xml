@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.system.blog.BlogCommentReplyMapper">
+    
+    <resultMap type="BlogCommentReply" id="BlogCommentReplyResult">
+        <result property="replyId"    column="reply_id"    />
+        <result property="replyUserId"    column="reply_user_id"    />
+        <result property="replyNumber"    column="reply_number"    />
+        <result property="replyContent"    column="reply_content"    />
+        <result property="publicTime"    column="public_time"    />
+        <result property="visitNumber"    column="visit_number"    />
+    </resultMap>
+
+    <sql id="selectBlogCommentReplyVo">
+        select reply_id, reply_user_id, reply_number, reply_content, public_time, visit_number from blog_comment_reply
+    </sql>
+
+    <select id="selectBlogCommentReplyList" parameterType="BlogCommentReply" resultMap="BlogCommentReplyResult">
+        <include refid="selectBlogCommentReplyVo"/>
+        <where>  
+            <if test="replyUserId != null "> and reply_user_id = #{replyUserId}</if>
+            <if test="replyNumber != null "> and reply_number = #{replyNumber}</if>
+            <if test="replyContent != null  and replyContent != ''"> and reply_content = #{replyContent}</if>
+            <if test="publicTime != null "> and public_time = #{publicTime}</if>
+            <if test="visitNumber != null "> and visit_number = #{visitNumber}</if>
+        </where>
+    </select>
+    
+    <select id="selectBlogCommentReplyById" parameterType="Long" resultMap="BlogCommentReplyResult">
+        <include refid="selectBlogCommentReplyVo"/>
+        where reply_id = #{replyId}
+    </select>
+        
+    <insert id="insertBlogCommentReply" parameterType="BlogCommentReply">
+        insert into blog_comment_reply
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="replyId != null">reply_id,</if>
+            <if test="replyUserId != null">reply_user_id,</if>
+            <if test="replyNumber != null">reply_number,</if>
+            <if test="replyContent != null and replyContent != ''">reply_content,</if>
+            <if test="publicTime != null">public_time,</if>
+            <if test="visitNumber != null">visit_number,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="replyId != null">#{replyId},</if>
+            <if test="replyUserId != null">#{replyUserId},</if>
+            <if test="replyNumber != null">#{replyNumber},</if>
+            <if test="replyContent != null and replyContent != ''">#{replyContent},</if>
+            <if test="publicTime != null">#{publicTime},</if>
+            <if test="visitNumber != null">#{visitNumber},</if>
+         </trim>
+    </insert>
+
+    <update id="updateBlogCommentReply" parameterType="BlogCommentReply">
+        update blog_comment_reply
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="replyUserId != null">reply_user_id = #{replyUserId},</if>
+            <if test="replyNumber != null">reply_number = #{replyNumber},</if>
+            <if test="replyContent != null and replyContent != ''">reply_content = #{replyContent},</if>
+            <if test="publicTime != null">public_time = #{publicTime},</if>
+            <if test="visitNumber != null">visit_number = #{visitNumber},</if>
+        </trim>
+        where reply_id = #{replyId}
+    </update>
+
+    <delete id="deleteBlogCommentReplyById" parameterType="Long">
+        delete from blog_comment_reply where reply_id = #{replyId}
+    </delete>
+
+    <delete id="deleteBlogCommentReplyByIds" parameterType="String">
+        delete from blog_comment_reply where reply_id in 
+        <foreach item="replyId" collection="array" open="(" separator="," close=")">
+            #{replyId}
+        </foreach>
+    </delete>
+
+</mapper>

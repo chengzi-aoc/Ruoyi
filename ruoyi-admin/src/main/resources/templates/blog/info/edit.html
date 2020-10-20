@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <th:block th:include="include :: header('修改文章内容信息')" />
+    <th:block th:include="include :: summernote-css" />
+</head>
+<body class="white-bg">
+    <div class="wrapper wrapper-content animated fadeInRight ibox-content">
+        <form class="form-horizontal m" id="form-info-edit" th:object="${blogArticleInfo}">
+            <input name="articleId" th:field="*{articleId}" type="hidden">
+            <div class="form-group">    
+                <label class="col-sm-3 control-label is-required">文章所属用户id：</label>
+                <div class="col-sm-8">
+                    <input name="articleUserId" th:field="*{articleUserId}" class="form-control" type="text" required>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label is-required">文章名称：</label>
+                <div class="col-sm-8">
+                    <input name="articleName" th:field="*{articleName}" class="form-control" type="text" required>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label is-required">文章标签：</label>
+                <div class="col-sm-8">
+                    <select name="articleLabel" class="form-control m-b" th:with="type=${@dict.getType('blog_article_label')}" required>
+                        <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}" th:field="*{articleLabel}"></option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label is-required">文章摘要：</label>
+                <div class="col-sm-8">
+                    <input name="articleAbstract" th:field="*{articleAbstract}" class="form-control" type="text" required>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label is-required">文章主题内容：</label>
+                <div class="col-sm-8">
+                    <input type="hidden" class="form-control" th:field="*{articleContent}">
+                    <div class="summernote" id="articleContent"></div>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label is-required">是否原创：</label>
+                <div class="col-sm-8">
+                    <select name="articleOriiginal" class="form-control m-b" th:with="type=${@dict.getType('blog_original')}" required>
+                        <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}" th:field="*{articleOriiginal}"></option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">访问次数：</label>
+                <div class="col-sm-8">
+                    <input name="visitNumber" th:field="*{visitNumber}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label is-required">创建人：</label>
+                <div class="col-sm-8">
+                    <input name="createUser" th:field="*{createUser}" class="form-control" type="text" required>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label is-required">删除标记：</label>
+                <div class="col-sm-8">
+                    <input name="deleteFlag" th:field="*{deleteFlag}" class="form-control" type="text" required>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label is-required">修改人：</label>
+                <div class="col-sm-8">
+                    <input name="updateUser" th:field="*{updateUser}" class="form-control" type="text" required>
+                </div>
+            </div>
+        </form>
+    </div>
+    <th:block th:include="include :: footer" />
+    <th:block th:include="include :: summernote-js" />
+    <script th:inline="javascript">
+        var prefix = ctx + "blog/info";
+        $("#form-info-edit").validate({
+            focusCleanup: true
+        });
+
+        function submitHandler() {
+            if ($.validate.form()) {
+                $.operate.save(prefix + "/edit", $('#form-info-edit').serialize());
+            }
+        }
+
+        $(function() {
+            $('.summernote').each(function(i) {
+                $('#' + this.id).summernote({
+                    lang: 'zh-CN',
+                    callbacks: {
+                        onChange: function(contents, $edittable) {
+                            $("input[name='" + this.id + "']").val(contents);
+                        },
+                        onImageUpload: function(files) {
+							var obj = this;
+							var data = new FormData();
+							data.append("file", files[0]);
+							$.ajax({
+								type: "post",
+								url: ctx + "common/upload",
+								data: data,
+								cache: false,
+								contentType: false,
+								processData: false,
+								dataType: 'json',
+								success: function(result) {
+									if (result.code == web_status.SUCCESS) {
+										$('#' + obj.id).summernote('insertImage', result.url);
+									} else {
+										$.modal.alertError(result.msg);
+									}
+								},
+								error: function(error) {
+									$.modal.alertWarning("图片上传失败。");
+								}
+							});
+						}
+                    }
+                });
+                var content = $("input[name='" + this.id + "']").val();
+                $('#' + this.id).summernote('code', content);
+            })
+        });
+    </script>
+</body>
+</html>

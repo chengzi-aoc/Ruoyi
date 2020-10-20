@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.system.blog.BlogFeedbackMapper">
+    
+    <resultMap type="BlogFeedback" id="BlogFeedbackResult">
+        <result property="feedId"    column="feed_id"    />
+        <result property="feedUserId"    column="feed_user_id"    />
+        <result property="feedContent"    column="feed_content"    />
+        <result property="feedContact"    column="feed_contact"    />
+        <result property="publicTime"    column="public_time"    />
+    </resultMap>
+
+    <sql id="selectBlogFeedbackVo">
+        select feed_id, feed_user_id, feed_content, feed_contact, public_time from blog_feedback
+    </sql>
+
+    <select id="selectBlogFeedbackList" parameterType="BlogFeedback" resultMap="BlogFeedbackResult">
+        <include refid="selectBlogFeedbackVo"/>
+        <where>  
+            <if test="feedUserId != null "> and feed_user_id = #{feedUserId}</if>
+            <if test="feedContent != null  and feedContent != ''"> and feed_content = #{feedContent}</if>
+            <if test="feedContact != null "> and feed_contact = #{feedContact}</if>
+            <if test="publicTime != null "> and public_time = #{publicTime}</if>
+        </where>
+    </select>
+    
+    <select id="selectBlogFeedbackById" parameterType="Long" resultMap="BlogFeedbackResult">
+        <include refid="selectBlogFeedbackVo"/>
+        where feed_id = #{feedId}
+    </select>
+        
+    <insert id="insertBlogFeedback" parameterType="BlogFeedback">
+        insert into blog_feedback
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="feedId != null">feed_id,</if>
+            <if test="feedUserId != null">feed_user_id,</if>
+            <if test="feedContent != null and feedContent != ''">feed_content,</if>
+            <if test="feedContact != null">feed_contact,</if>
+            <if test="publicTime != null">public_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="feedId != null">#{feedId},</if>
+            <if test="feedUserId != null">#{feedUserId},</if>
+            <if test="feedContent != null and feedContent != ''">#{feedContent},</if>
+            <if test="feedContact != null">#{feedContact},</if>
+            <if test="publicTime != null">#{publicTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateBlogFeedback" parameterType="BlogFeedback">
+        update blog_feedback
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="feedUserId != null">feed_user_id = #{feedUserId},</if>
+            <if test="feedContent != null and feedContent != ''">feed_content = #{feedContent},</if>
+            <if test="feedContact != null">feed_contact = #{feedContact},</if>
+            <if test="publicTime != null">public_time = #{publicTime},</if>
+        </trim>
+        where feed_id = #{feedId}
+    </update>
+
+    <delete id="deleteBlogFeedbackById" parameterType="Long">
+        delete from blog_feedback where feed_id = #{feedId}
+    </delete>
+
+    <delete id="deleteBlogFeedbackByIds" parameterType="String">
+        delete from blog_feedback where feed_id in 
+        <foreach item="feedId" collection="array" open="(" separator="," close=")">
+            #{feedId}
+        </foreach>
+    </delete>
+
+</mapper>

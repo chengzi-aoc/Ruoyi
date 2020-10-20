@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.system.blog.BlogLinkMapper">
+    
+    <resultMap type="BlogLink" id="BlogLinkResult">
+        <result property="linkId"    column="link_id"    />
+        <result property="linkUserId"    column="link_user_id"    />
+        <result property="articleId"    column="article_id"    />
+        <result property="linkName"    column="link_name"    />
+        <result property="linkUrl"    column="link_url"    />
+        <result property="createUser"    column="create_user"    />
+        <result property="createTime"    column="create_time"    />
+    </resultMap>
+
+    <sql id="selectBlogLinkVo">
+        select link_id, link_user_id, article_id, link_name, link_url, create_user, create_time from blog_link
+    </sql>
+
+    <select id="selectBlogLinkList" parameterType="BlogLink" resultMap="BlogLinkResult">
+        <include refid="selectBlogLinkVo"/>
+        <where>  
+            <if test="linkUserId != null "> and link_user_id = #{linkUserId}</if>
+            <if test="articleId != null "> and article_id = #{articleId}</if>
+            <if test="linkName != null  and linkName != ''"> and link_name like concat('%', #{linkName}, '%')</if>
+            <if test="linkUrl != null  and linkUrl != ''"> and link_url = #{linkUrl}</if>
+            <if test="createUser != null  and createUser != ''"> and create_user = #{createUser}</if>
+        </where>
+    </select>
+    
+    <select id="selectBlogLinkById" parameterType="Long" resultMap="BlogLinkResult">
+        <include refid="selectBlogLinkVo"/>
+        where link_id = #{linkId}
+    </select>
+        
+    <insert id="insertBlogLink" parameterType="BlogLink">
+        insert into blog_link
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="linkId != null">link_id,</if>
+            <if test="linkUserId != null">link_user_id,</if>
+            <if test="articleId != null">article_id,</if>
+            <if test="linkName != null and linkName != ''">link_name,</if>
+            <if test="linkUrl != null and linkUrl != ''">link_url,</if>
+            <if test="createUser != null and createUser != ''">create_user,</if>
+            <if test="createTime != null">create_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="linkId != null">#{linkId},</if>
+            <if test="linkUserId != null">#{linkUserId},</if>
+            <if test="articleId != null">#{articleId},</if>
+            <if test="linkName != null and linkName != ''">#{linkName},</if>
+            <if test="linkUrl != null and linkUrl != ''">#{linkUrl},</if>
+            <if test="createUser != null and createUser != ''">#{createUser},</if>
+            <if test="createTime != null">#{createTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateBlogLink" parameterType="BlogLink">
+        update blog_link
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="linkUserId != null">link_user_id = #{linkUserId},</if>
+            <if test="articleId != null">article_id = #{articleId},</if>
+            <if test="linkName != null and linkName != ''">link_name = #{linkName},</if>
+            <if test="linkUrl != null and linkUrl != ''">link_url = #{linkUrl},</if>
+            <if test="createUser != null and createUser != ''">create_user = #{createUser},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+        </trim>
+        where link_id = #{linkId}
+    </update>
+
+    <delete id="deleteBlogLinkById" parameterType="Long">
+        delete from blog_link where link_id = #{linkId}
+    </delete>
+
+    <delete id="deleteBlogLinkByIds" parameterType="String">
+        delete from blog_link where link_id in 
+        <foreach item="linkId" collection="array" open="(" separator="," close=")">
+            #{linkId}
+        </foreach>
+    </delete>
+
+</mapper>

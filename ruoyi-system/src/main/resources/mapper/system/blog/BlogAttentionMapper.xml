@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.system.blog.BlogAttentionMapper">
+    
+    <resultMap type="BlogAttention" id="BlogAttentionResult">
+        <result property="id"    column="id"    />
+        <result property="userId"    column="user_id"    />
+        <result property="attentionId"    column="attention_id"    />
+        <result property="attentionName"    column="attention_name"    />
+        <result property="createUser"    column="create_user"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="deleteFlag"    column="delete_flag"    />
+    </resultMap>
+
+    <sql id="selectBlogAttentionVo">
+        select id, user_id, attention_id, attention_name, create_user, create_time, delete_flag from blog_attention
+    </sql>
+
+    <select id="selectBlogAttentionList" parameterType="BlogAttention" resultMap="BlogAttentionResult">
+        <include refid="selectBlogAttentionVo"/>
+        <where>  
+            <if test="userId != null "> and user_id = #{userId}</if>
+            <if test="attentionId != null "> and attention_id = #{attentionId}</if>
+            <if test="attentionName != null  and attentionName != ''"> and attention_name like concat('%', #{attentionName}, '%')</if>
+            <if test="createUser != null  and createUser != ''"> and create_user = #{createUser}</if>
+            <if test="deleteFlag != null  and deleteFlag != ''"> and delete_flag = #{deleteFlag}</if>
+        </where>
+    </select>
+    
+    <select id="selectBlogAttentionById" parameterType="Long" resultMap="BlogAttentionResult">
+        <include refid="selectBlogAttentionVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertBlogAttention" parameterType="BlogAttention">
+        insert into blog_attention
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="userId != null">user_id,</if>
+            <if test="attentionId != null">attention_id,</if>
+            <if test="attentionName != null and attentionName != ''">attention_name,</if>
+            <if test="createUser != null and createUser != ''">create_user,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="deleteFlag != null and deleteFlag != ''">delete_flag,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="userId != null">#{userId},</if>
+            <if test="attentionId != null">#{attentionId},</if>
+            <if test="attentionName != null and attentionName != ''">#{attentionName},</if>
+            <if test="createUser != null and createUser != ''">#{createUser},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="deleteFlag != null and deleteFlag != ''">#{deleteFlag},</if>
+         </trim>
+    </insert>
+
+    <update id="updateBlogAttention" parameterType="BlogAttention">
+        update blog_attention
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="attentionId != null">attention_id = #{attentionId},</if>
+            <if test="attentionName != null and attentionName != ''">attention_name = #{attentionName},</if>
+            <if test="createUser != null and createUser != ''">create_user = #{createUser},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="deleteFlag != null and deleteFlag != ''">delete_flag = #{deleteFlag},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteBlogAttentionById" parameterType="Long">
+        delete from blog_attention where id = #{id}
+    </delete>
+
+    <delete id="deleteBlogAttentionByIds" parameterType="String">
+        delete from blog_attention where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>

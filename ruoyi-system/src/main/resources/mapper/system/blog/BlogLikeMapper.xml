@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.system.blog.BlogLikeMapper">
+    
+    <resultMap type="BlogLike" id="BlogLikeResult">
+        <result property="likeId"    column="like_id"    />
+        <result property="likeUserId"    column="like_user_id"    />
+        <result property="articleId"    column="article_id"    />
+        <result property="createUser"    column="create_user"    />
+        <result property="createTime"    column="create_time"    />
+    </resultMap>
+
+    <sql id="selectBlogLikeVo">
+        select like_id, like_user_id, article_id, create_user, create_time from blog_like
+    </sql>
+
+    <select id="selectBlogLikeList" parameterType="BlogLike" resultMap="BlogLikeResult">
+        <include refid="selectBlogLikeVo"/>
+        <where>  
+            <if test="likeUserId != null "> and like_user_id = #{likeUserId}</if>
+            <if test="articleId != null "> and article_id = #{articleId}</if>
+            <if test="createUser != null  and createUser != ''"> and create_user = #{createUser}</if>
+        </where>
+    </select>
+    
+    <select id="selectBlogLikeById" parameterType="Long" resultMap="BlogLikeResult">
+        <include refid="selectBlogLikeVo"/>
+        where like_id = #{likeId}
+    </select>
+        
+    <insert id="insertBlogLike" parameterType="BlogLike">
+        insert into blog_like
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="likeId != null">like_id,</if>
+            <if test="likeUserId != null">like_user_id,</if>
+            <if test="articleId != null">article_id,</if>
+            <if test="createUser != null and createUser != ''">create_user,</if>
+            <if test="createTime != null">create_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="likeId != null">#{likeId},</if>
+            <if test="likeUserId != null">#{likeUserId},</if>
+            <if test="articleId != null">#{articleId},</if>
+            <if test="createUser != null and createUser != ''">#{createUser},</if>
+            <if test="createTime != null">#{createTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateBlogLike" parameterType="BlogLike">
+        update blog_like
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="likeUserId != null">like_user_id = #{likeUserId},</if>
+            <if test="articleId != null">article_id = #{articleId},</if>
+            <if test="createUser != null and createUser != ''">create_user = #{createUser},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+        </trim>
+        where like_id = #{likeId}
+    </update>
+
+    <delete id="deleteBlogLikeById" parameterType="Long">
+        delete from blog_like where like_id = #{likeId}
+    </delete>
+
+    <delete id="deleteBlogLikeByIds" parameterType="String">
+        delete from blog_like where like_id in 
+        <foreach item="likeId" collection="array" open="(" separator="," close=")">
+            #{likeId}
+        </foreach>
+    </delete>
+
+</mapper>
