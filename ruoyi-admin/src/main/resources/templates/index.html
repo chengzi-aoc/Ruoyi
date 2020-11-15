@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="renderer" content="webkit">
-    <title>若依系统首页</title>
+    <title>MyBlog</title>
     <!-- 避免IE使用兼容模式 -->
  	<meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link th:href="@{favicon.ico}" rel="shortcut icon"/>
@@ -185,9 +185,13 @@
                     </a>
                 </div>
                 <ul class="nav navbar-top-links navbar-right welcome-message">
-                    <li><a title="视频教程" href="http://doc.ruoyi.vip/ruoyi/document/spjc.html" target="_blank"><i class="fa fa-video-camera"></i> 视频教程</a></li>
-                    <li><a title="开发文档" href="http://doc.ruoyi.vip" target="_blank"><i class="fa fa-question-circle"></i> 开发文档</a></li>
-	                <li><a title="全屏显示" href="javascript:void(0)" id="fullScreen"><i class="fa fa-arrows-alt"></i> 全屏显示</a></li>
+                    <!--<li><a title="视频教程" href="http://doc.ruoyi.vip/ruoyi/document/spjc.html" target="_blank"><i class="fa fa-video-camera"></i> 视频教程</a></li>
+                    <li><a title="开发文档" href="http://doc.ruoyi.vip" target="_blank"><i class="fa fa-question-circle"></i> 开发文档</a></li>-->
+	                <a type="button" title="创作中心" class="btn btn-info btn-sm" onclick="creat()"><i class="fa fa-pencil"></i>&nbsp; 创作中心</a>
+					<li><a title="收藏" href="#" target="_blank"><i class="fa fa-star"></i> 收藏</a></li>
+                    <li><a title="动态" href="#" target="_blank"><i class="fa fa-paper-plane"></i> 动态</a></li>
+					<li><a title="动态" href="#" target="_blank"><i class="fa fa-commenting"></i> 消息</a></li>
+					<!--<li><a title="全屏显示" href="javascript:void(0)" id="fullScreen"><i class="fa fa-arrows-alt"></i> 全屏显示</a></li>-->
                     <li class="dropdown user-menu">
 						<a href="javascript:void(0)" class="dropdown-toggle" data-hover="dropdown">
 							<img th:src="(${#strings.isEmpty(user.avatar)}) ? @{/img/profile.jpg} : @{${user.avatar}}" th:onerror="this.src='img/profile.jpg'" class="user-image">
@@ -314,6 +318,11 @@ function applyPath(url) {
 	}
 }
 
+/** 创作中心*/
+function creat(){
+
+}
+
 $(function() {
 	if($.common.equals("history", mode) && window.performance.navigation.type == 1) {
 		var url = storage.get('publicPath');
@@ -358,6 +367,7 @@ $(function() {
 		});
 	}
 });
+
 </script>
 </body>
 </html>
