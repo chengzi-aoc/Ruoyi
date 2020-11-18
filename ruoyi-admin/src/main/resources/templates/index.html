@@ -187,7 +187,7 @@
                 <ul class="nav navbar-top-links navbar-right welcome-message">
                     <!--<li><a title="视频教程" href="http://doc.ruoyi.vip/ruoyi/document/spjc.html" target="_blank"><i class="fa fa-video-camera"></i> 视频教程</a></li>
                     <li><a title="开发文档" href="http://doc.ruoyi.vip" target="_blank"><i class="fa fa-question-circle"></i> 开发文档</a></li>-->
-	                <a type="button" title="创作中心" class="btn btn-info btn-sm" onclick="creat()"><i class="fa fa-pencil"></i>&nbsp; 创作中心</a>
+	                <a type="button" title="创作中心" class="btn btn-info btn-sm menuItem" th:href="@{/blog/info/creative}"><i class="fa fa-pencil"></i>&nbsp; 创作中心</a>
 					<li><a title="收藏" href="#" target="_blank"><i class="fa fa-star"></i> 收藏</a></li>
                     <li><a title="动态" href="#" target="_blank"><i class="fa fa-paper-plane"></i> 动态</a></li>
 					<li><a title="动态" href="#" target="_blank"><i class="fa fa-commenting"></i> 消息</a></li>
@@ -316,11 +316,6 @@ function applyPath(url) {
 	if (!$('a[href$="' + url + '"]').hasClass("noactive")) {
 	    $('a[href$="' + url + '"]').parent("li").addClass("selected").parents("li").addClass("active").end().parents("ul").addClass("in");
 	}
-}
-
-/** 创作中心*/
-function creat(){
-
 }
 
 $(function() {
