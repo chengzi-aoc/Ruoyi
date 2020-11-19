@@ -105,8 +105,17 @@ function fixedSidebar() {
     100);
 }
 
+function() {
+    if ($(this).width() < 769) {
+        $('body').addClass('mini-navbar');
+        // $('.navbar-static-side').fadeIn();
+        $('.navbar-static-side').hide();
+        $(".sidebar-collapse .logo").addClass("hide");
+    }
+});
+
 function SmoothlyMenu() {
-    if (isMobile && !$('body').hasClass('canvas-menu')) {
+    /*if (isMobile && !$('body').hasClass('canvas-menu')) {
     	$('.navbar-static-side').fadeIn();
     	fixedSidebar();
     } else if (!isMobile &&!$('body').hasClass('mini-navbar')) {
@@ -117,6 +126,25 @@ function SmoothlyMenu() {
     	fixedSidebar();
     } else if (!isMobile && $('body').hasClass('fixed-sidebar')) {
     	fixedSidebar();
+    } else {
+        $('#side-menu').removeAttr('style');
+    }*/
+    if (!$('body').hasClass('mini-navbar')) {
+        $(".navbar-static-side").show();  // 添加显示这一行
+        $('#side-menu').hide();
+        $(".sidebar-collapse .logo").removeClass("hide");
+        setTimeout(function() {
+                $('#side-menu').fadeIn(500);
+            },
+            100);
+    } else if ($('body').hasClass('fixed-sidebar')) {
+        $(".navbar-static-side").hide();  // 添加隐藏这一行
+        $('#side-menu').hide();
+        $(".sidebar-collapse .logo").addClass("hide");
+        setTimeout(function() {
+                $('#side-menu').fadeIn(500);
+            },
+            300);
     } else {
         $('#side-menu').removeAttr('style');
     }
