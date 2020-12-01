@@ -234,10 +234,14 @@
 				</div>
                 <!-- 右侧栏 -->
                 <ul class="nav navbar-top-links navbar-right welcome-message">
-                    <li><a title="视频教程" href="http://doc.ruoyi.vip/ruoyi/document/spjc.html" target="_blank"><i class="fa fa-video-camera"></i> 视频教程</a></li>
+                   <!-- <li><a title="视频教程" href="http://doc.ruoyi.vip/ruoyi/document/spjc.html" target="_blank"><i class="fa fa-video-camera"></i> 视频教程</a></li>
                     <li><a title="开发文档" href="http://doc.ruoyi.vip" target="_blank"><i class="fa fa-question-circle"></i> 开发文档</a></li>
-	                <li><a title="全屏显示" href="javascript:void(0)" id="fullScreen"><i class="fa fa-arrows-alt"></i> 全屏显示</a></li>
-                    <li class="dropdown user-menu">
+	                <li><a title="全屏显示" href="javascript:void(0)" id="fullScreen"><i class="fa fa-arrows-alt"></i> 全屏显示</a></li>-->
+					<a type="button" title="创作中心" class="btn btn-info btn-sm menuItem" th:href="@{/blog/info/creative}"><i class="fa fa-pencil"></i>&nbsp; 创作中心</a>
+					<li><a title="收藏" href="#" target="_blank"><i class="fa fa-star"></i> 收藏</a></li>
+					<li><a title="动态" href="#" target="_blank"><i class="fa fa-paper-plane"></i> 动态</a></li>
+					<li><a title="动态" href="#" target="_blank"><i class="fa fa-commenting"></i> 消息</a></li>
+					<li class="dropdown user-menu">
 						<a href="javascript:void(0)" class="dropdown-toggle" data-hover="dropdown">
 							<img th:src="(${#strings.isEmpty(user.avatar)}) ? @{/img/profile.jpg} : @{${user.avatar}}" th:onerror="this.src='img/profile.jpg'" class="user-image">
 							<span class="hidden-xs">[[${#strings.defaultString(user.userName, '-')}]]</span>

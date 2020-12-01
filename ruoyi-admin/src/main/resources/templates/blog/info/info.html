@@ -4,110 +4,85 @@
     <th:block th:include="include :: header('文章内容信息列表')" />
 </head>
 <body class="gray-bg">
-     <div class="container-div">
-        <div class="row">
-            <div class="col-sm-12 search-collapse">
-                <form id="formId">
-                    <div class="select-list">
-                        <ul>
-                            <li>
-                                <label>文章所属用户id：</label>
-                                <input type="text" name="articleUserId"/>
-                            </li>
-                            <li>
-                                <label>文章名称：</label>
-                                <input type="text" name="articleName"/>
-                            </li>
-                            <li>
-                                <label>文章标签：</label>
-                                <select name="articleLabel" th:with="type=${@dict.getType('blog_article_label')}">
-                                    <option value="">所有</option>
-                                    <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
-                                </select>
-                            </li>
-                            <li>
-                                <label>文章摘要：</label>
-                                <input type="text" name="articleAbstract"/>
-                            </li>
-                            <li>
-                                <label>是否原创：</label>
-                                <select name="articleOriiginal" th:with="type=${@dict.getType('blog_original')}">
-                                    <option value="">所有</option>
-                                    <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
-                                </select>
-                            </li>
-                            <li>
-                                <label>访问次数：</label>
-                                <input type="text" name="visitNumber"/>
-                            </li>
-                            <li>
-                                <label>创建人：</label>
-                                <input type="text" name="createUser"/>
-                            </li>
-                            <li>
-                                <label>删除标记：</label>
-                                <input type="text" name="deleteFlag"/>
-                            </li>
-                            <li>
-                                <label>修改人：</label>
-                                <input type="text" name="updateUser"/>
-                            </li>
-                            <li>
-                                <a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
-                                <a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-refresh"></i>&nbsp;重置</a>
-                            </li>
-                        </ul>
-                    </div>
-                </form>
-            </div>
+<div class="container-div">
+    <div class="row">
+        <div class="col-sm-12 search-collapse">
+            <form id="formId">
+                <div class="select-list">
+                    <ul>
+                        <li>
+                            <label>名称：</label>
+                            <input type="text" name="articleName"/>
+                        </li>
+                        <li>
+                            <label>标签：</label>
+                            <select name="articleLabel" th:with="type=${@dict.getType('blog_article_label')}">
+                                <option value="">所有</option>
+                                <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+                            </select>
+                        </li>
+                        <li>
+                            <label>状态：</label>
+                            <select name="status" th:with="type=${@dict.getType('sys_show_hide')}">
+                                <option value="">所有</option>
+                                <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+                            </select>
+                        </li>
+                        <li>
+                            <label>原创：</label>
+                            <select name="articleOriiginal" th:with="type=${@dict.getType('blog_original')}">
+                                <option value="">所有</option>
+                                <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+                            </select>
+                        </li>
+                        <li>
+                            <a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i> 搜索</a>
+                            <a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-refresh"></i> 重置</a>
+                        </li>
+                    </ul>
+                </div>
+            </form>
+        </div>
 
-            <div class="btn-group-sm" id="toolbar" role="group">
-                <a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="blog:info:add">
-                    <i class="fa fa-plus"></i> 添加
-                </a>
-                <a class="btn btn-primary single disabled" onclick="$.operate.edit()" shiro:hasPermission="blog:info:edit">
-                    <i class="fa fa-edit"></i> 修改
-                </a>
-                <a class="btn btn-danger multiple disabled" onclick="$.operate.removeAll()" shiro:hasPermission="blog:info:remove">
-                    <i class="fa fa-remove"></i> 删除
-                </a>
-                <a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="blog:info:export">
-                    <i class="fa fa-download"></i> 导出
-                </a>
-            </div>
-            <div class="col-sm-12 select-table table-striped">
-                <table id="bootstrap-table"></table>
-            </div>
+        <div class="btn-group-sm" id="toolbar" role="group">
+            <a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="blog:info:add">
+                <i class="fa fa-plus"></i> 添加
+            </a>
+            <a class="btn btn-primary single disabled" onclick="$.operate.edit()" shiro:hasPermission="blog:info:edit">
+                <i class="fa fa-edit"></i> 修改
+            </a>
+            <a class="btn btn-danger multiple disabled" onclick="$.operate.removeAll()" shiro:hasPermission="blog:info:remove">
+                <i class="fa fa-remove"></i> 删除
+            </a>
+            <a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="blog:info:export">
+                <i class="fa fa-download"></i> 导出
+            </a>
+        </div>
+        <div class="col-sm-12 select-table table-striped">
+            <table id="bootstrap-table"></table>
         </div>
     </div>
-    <th:block th:include="include :: footer" />
-    <script th:inline="javascript">
-        var editFlag = [[${@permission.hasPermi('blog:info:edit')}]];
-        var removeFlag = [[${@permission.hasPermi('blog:info:remove')}]];
-        var articleLabelDatas = [[${@dict.getType('blog_article_label')}]];
-        var articleOriiginalDatas = [[${@dict.getType('blog_original')}]];
-        var prefix = ctx + "blog/info";
+</div>
+<th:block th:include="include :: footer" />
+<script th:inline="javascript">
+    var editFlag = [[${@permission.hasPermi('blog:info:edit')}]];
+    var removeFlag = [[${@permission.hasPermi('blog:info:remove')}]];
+    var articleLabelDatas = [[${@dict.getType('blog_article_label')}]];
+    var statusDatas = [[${@dict.getType('sys_show_hide')}]];
+    var articleOriiginalDatas = [[${@dict.getType('blog_original')}]];
+    var prefix = ctx + "blog/info";
 
-        $(function() {
-            var options = {
-                url: prefix + "/list",
-                createUrl: prefix + "/add",
-                updateUrl: prefix + "/edit/{id}",
-                removeUrl: prefix + "/remove",
-                exportUrl: prefix + "/export",
-                modalName: "文章内容信息",
-                columns: [{
-                    checkbox: true
-                },
-                {
-                    field: 'articleId',
-                    title: '文章id',
-                    visible: false
-                },
-                {
-                    field: 'articleUserId',
-                    title: '文章所属用户id'
-                },
+    $(function() {
+        var options = {
+            url: prefix + "/list",
+            createUrl: prefix + "/add",
+            updateUrl: prefix + "/edit/{id}",
+            removeUrl: prefix + "/remove",
+            exportUrl: prefix + "/export",
+            modalName: "文章内容信息",
+            columns: [{
+                checkbox: true
+            },
                 {
                     field: 'articleName',
                     title: '文章名称'
@@ -116,7 +91,7 @@
                     field: 'articleLabel',
                     title: '文章标签',
                     formatter: function(value, row, index) {
-                       return $.table.selectDictLabel(articleLabelDatas, value);
+                        return $.table.selectDictLabel(articleLabelDatas, value);
                     }
                 },
                 {
@@ -124,14 +99,17 @@
                     title: '文章摘要'
                 },
                 {
-                    field: 'articleContent',
-                    title: '文章主题内容'
+                    field: 'status',
+                    title: '状态',
+                    formatter: function(value, row, index) {
+                        return $.table.selectDictLabel(statusDatas, value);
+                    }
                 },
                 {
                     field: 'articleOriiginal',
                     title: '是否原创',
                     formatter: function(value, row, index) {
-                       return $.table.selectDictLabel(articleOriiginalDatas, value);
+                        return $.table.selectDictLabel(articleOriiginalDatas, value);
                     }
                 },
                 {
@@ -143,14 +121,6 @@
                     title: '创建人'
                 },
                 {
-                    field: 'deleteFlag',
-                    title: '删除标记'
-                },
-                {
-                    field: 'updateUser',
-                    title: '修改人'
-                },
-                {
                     title: '操作',
                     align: 'center',
                     formatter: function(value, row, index) {
@@ -160,9 +130,9 @@
                         return actions.join('');
                     }
                 }]
-            };
-            $.table.init(options);
-        });
-    </script>
+        };
+        $.table.init(options);
+    });
+</script>
 </body>
 </html>

@@ -7,9 +7,9 @@ import com.ruoyi.common.core.domain.BaseEntity;
 
 /**
  * 文章内容信息对象 blog_article_info
- * 
+ *
  * @author ruoyi
- * @date 2020-10-20
+ * @date 2020-11-30
  */
 public class BlogArticleInfo extends BaseEntity
 {
@@ -26,7 +26,7 @@ public class BlogArticleInfo extends BaseEntity
     @Excel(name = "文章名称")
     private String articleName;
 
-    /** 文章标签 */
+    /** 文章标签(字典数据) */
     @Excel(name = "文章标签")
     private String articleLabel;
 
@@ -37,6 +37,10 @@ public class BlogArticleInfo extends BaseEntity
     /** 文章主题内容 */
     @Excel(name = "文章主题内容")
     private String articleContent;
+
+    /** 状态(0：显示；1：隐藏) */
+    @Excel(name = "状态",readConverterExp = "0=：显示；1：隐藏")
+    private String status;
 
     /** 是否原创（0：是；1：不是） */
     @Excel(name = "是否原创", readConverterExp = "0=：是；1：不是")
@@ -58,102 +62,111 @@ public class BlogArticleInfo extends BaseEntity
     @Excel(name = "修改人")
     private String updateUser;
 
-    public void setArticleId(Long articleId) 
+    public void setArticleId(Long articleId)
     {
         this.articleId = articleId;
     }
 
-    public Long getArticleId() 
+    public Long getArticleId()
     {
         return articleId;
     }
-    public void setArticleUserId(Long articleUserId) 
+    public void setArticleUserId(Long articleUserId)
     {
         this.articleUserId = articleUserId;
     }
 
-    public Long getArticleUserId() 
+    public Long getArticleUserId()
     {
         return articleUserId;
     }
-    public void setArticleName(String articleName) 
+    public void setArticleName(String articleName)
     {
         this.articleName = articleName;
     }
 
-    public String getArticleName() 
+    public String getArticleName()
     {
         return articleName;
     }
-    public void setArticleLabel(String articleLabel) 
+    public void setArticleLabel(String articleLabel)
     {
         this.articleLabel = articleLabel;
     }
 
-    public String getArticleLabel() 
+    public String getArticleLabel()
     {
         return articleLabel;
     }
-    public void setArticleAbstract(String articleAbstract) 
+    public void setArticleAbstract(String articleAbstract)
     {
         this.articleAbstract = articleAbstract;
     }
 
-    public String getArticleAbstract() 
+    public String getArticleAbstract()
     {
         return articleAbstract;
     }
-    public void setArticleContent(String articleContent) 
+    public void setArticleContent(String articleContent)
     {
         this.articleContent = articleContent;
     }
 
-    public String getArticleContent() 
+    public String getArticleContent()
     {
         return articleContent;
     }
-    public void setArticleOriiginal(String articleOriiginal) 
+    public void setStatus(String status)
+    {
+        this.status = status;
+    }
+
+    public String getStatus()
+    {
+        return status;
+    }
+    public void setArticleOriiginal(String articleOriiginal)
     {
         this.articleOriiginal = articleOriiginal;
     }
 
-    public String getArticleOriiginal() 
+    public String getArticleOriiginal()
     {
         return articleOriiginal;
     }
-    public void setVisitNumber(Integer visitNumber) 
+    public void setVisitNumber(Integer visitNumber)
     {
         this.visitNumber = visitNumber;
     }
 
-    public Integer getVisitNumber() 
+    public Integer getVisitNumber()
     {
         return visitNumber;
     }
-    public void setCreateUser(String createUser) 
+    public void setCreateUser(String createUser)
     {
         this.createUser = createUser;
     }
 
-    public String getCreateUser() 
+    public String getCreateUser()
     {
         return createUser;
     }
-    public void setDeleteFlag(String deleteFlag) 
+    public void setDeleteFlag(String deleteFlag)
     {
         this.deleteFlag = deleteFlag;
     }
 
-    public String getDeleteFlag() 
+    public String getDeleteFlag()
     {
         return deleteFlag;
     }
-    public void setUpdateUser(String updateUser) 
+    public void setUpdateUser(String updateUser)
     {
         this.updateUser = updateUser;
     }
 
-    public String getUpdateUser() 
+    public String getUpdateUser()
     {
         return updateUser;
     }
@@ -161,19 +174,20 @@ public class BlogArticleInfo extends BaseEntity
     @Override
     public String toString() {
         return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
-            .append("articleId", getArticleId())
-            .append("articleUserId", getArticleUserId())
-            .append("articleName", getArticleName())
-            .append("articleLabel", getArticleLabel())
-            .append("articleAbstract", getArticleAbstract())
-            .append("articleContent", getArticleContent())
-            .append("articleOriiginal", getArticleOriiginal())
-            .append("visitNumber", getVisitNumber())
-            .append("createUser", getCreateUser())
-            .append("createTime", getCreateTime())
-            .append("deleteFlag", getDeleteFlag())
-            .append("updateUser", getUpdateUser())
-            .append("updateTime", getUpdateTime())
-            .toString();
+                .append("articleId", getArticleId())
+                .append("articleUserId", getArticleUserId())
+                .append("articleName", getArticleName())
+                .append("articleLabel", getArticleLabel())
+                .append("articleAbstract", getArticleAbstract())
+                .append("articleContent", getArticleContent())
+                .append("status", getStatus())
+                .append("articleOriiginal", getArticleOriiginal())
+                .append("visitNumber", getVisitNumber())
+                .append("createUser", getCreateUser())
+                .append("createTime", getCreateTime())
+                .append("deleteFlag", getDeleteFlag())
+                .append("updateUser", getUpdateUser())
+                .append("updateTime", getUpdateTime())
+                .toString();
     }
 }

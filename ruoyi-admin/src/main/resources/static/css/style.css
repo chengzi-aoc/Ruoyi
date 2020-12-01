@@ -460,11 +460,11 @@ body.fixed-sidebar.mini-navbar .navbar-static-side {
 }
 
 body.fixed-sidebar.mini-navbar #page-wrapper {
-    margin: 0 0 0 0px;
+    margin: 0 0 0 70px;
 }
 
 body.body-small.fixed-sidebar.mini-navbar #page-wrapper {
-    margin: 0 0 0 0px;
+    margin: 0 0 0 70px;
 }
 
 body.body-small.fixed-sidebar.mini-navbar .navbar-static-side {

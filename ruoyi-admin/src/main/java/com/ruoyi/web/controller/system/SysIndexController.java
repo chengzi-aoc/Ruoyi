@@ -37,7 +37,7 @@ public class SysIndexController extends BaseController
     private ISysConfigService configService;
 
     // 系统首页
-    @GetMapping("/index")
+    @GetMapping("/Administrator")
     public String index(ModelMap mmap)
     {
         // 取身份信息
@@ -57,7 +57,7 @@ public class SysIndexController extends BaseController
         // 菜单导航显示风格
         String menuStyle = configService.selectConfigByKey("sys.index.menuStyle");
         // 移动端，默认使左侧导航菜单，否则取默认配置
-        String indexStyle = ServletUtils.checkAgentIsMobile(ServletUtils.getRequest().getHeader("User-Agent")) ? "index" : menuStyle;
+        String indexStyle = ServletUtils.checkAgentIsMobile(ServletUtils.getRequest().getHeader("User-Agent")) ? "Administrator" : menuStyle;
 
         // 优先Cookie配置导航菜单
         Cookie[] cookies = ServletUtils.getRequest().getCookies();
@@ -69,7 +69,7 @@ public class SysIndexController extends BaseController
                 break;
             }
         }
-        String webIndex = "topnav".equalsIgnoreCase(indexStyle) ? "index-topnav" : "index";
+        String webIndex = "topnav".equalsIgnoreCase(indexStyle) ? "index-topnav" : "Administrator";
         return webIndex;
     }
 

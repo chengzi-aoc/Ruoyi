@@ -26,7 +26,7 @@
         </div>
         <a th:href="@{/index}">
             <li class="logo hidden-xs">
-                <span class="logo-lg">RuoYi</span>
+                <span class="logo-lg">myBlog</span>
             </li>
          </a>
         <div class="sidebar-collapse">
@@ -187,7 +187,7 @@
                 <ul class="nav navbar-top-links navbar-right welcome-message">
                     <!--<li><a title="视频教程" href="http://doc.ruoyi.vip/ruoyi/document/spjc.html" target="_blank"><i class="fa fa-video-camera"></i> 视频教程</a></li>
                     <li><a title="开发文档" href="http://doc.ruoyi.vip" target="_blank"><i class="fa fa-question-circle"></i> 开发文档</a></li>-->
-	                <a type="button" title="创作中心" class="btn btn-info btn-sm menuItem" th:href="@{/blog/info/creative}"><i class="fa fa-pencil"></i>&nbsp; 创作中心</a>
+	                <a title="创作中心" class="btn btn-info btn-sm menuItem" th:href="@{/blog/info/add}"><i class="fa fa-pencil"></i>&nbsp; 创作中心</a>
 					<li><a title="收藏" href="#" target="_blank"><i class="fa fa-star"></i> 收藏</a></li>
                     <li><a title="动态" href="#" target="_blank"><i class="fa fa-paper-plane"></i> 动态</a></li>
 					<li><a title="动态" href="#" target="_blank"><i class="fa fa-commenting"></i> 消息</a></li>
@@ -210,10 +210,10 @@
 								<a onclick="switchSkin()">
 								<i class="fa fa-dashboard"></i> 切换主题</a>
 							</li>
-							<li>
+							<!--<li>
 								<a onclick="toggleMenu()">
 								<i class="fa fa-toggle-off"></i> 横向菜单</a>
-							</li>
+							</li>-->
 							<li class="divider"></li>
 							<li>
 								<a th:href="@{logout}">
@@ -302,13 +302,13 @@ function switchSkin() {
 }
 
 /* 切换菜单 */
-function toggleMenu() {
+/*function toggleMenu() {
 	$.modal.confirm("确认要切换成横向菜单吗？", function() {
 		$.get(ctx + 'system/menuStyle/topnav', function(result) {
             window.location.reload();
 	    });
 	})
-}
+}*/
 
 /** 刷新时访问路径页签 */
 function applyPath(url) {
@@ -345,7 +345,7 @@ $(function() {
 			offset: ['30%']
 		}, function (index) {
 			resetPwd();
-			layer.close(index);
+			layer.close(Administrator);
 		});
 	}
 	
@@ -358,7 +358,7 @@ $(function() {
 			offset: ['30%']
 		}, function (index) {
 			resetPwd();
-			layer.close(index);
+			layer.close(Administrator);
 		});
 	}
 });

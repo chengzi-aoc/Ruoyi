@@ -105,17 +105,17 @@ function fixedSidebar() {
     100);
 }
 
-function() {
+/*function() {
     if ($(this).width() < 769) {
         $('body').addClass('mini-navbar');
         // $('.navbar-static-side').fadeIn();
         $('.navbar-static-side').hide();
         $(".sidebar-collapse .logo").addClass("hide");
     }
-});
+});*/
 
 function SmoothlyMenu() {
-    /*if (isMobile && !$('body').hasClass('canvas-menu')) {
+    if (isMobile && !$('body').hasClass('canvas-menu')) {
     	$('.navbar-static-side').fadeIn();
     	fixedSidebar();
     } else if (!isMobile &&!$('body').hasClass('mini-navbar')) {
@@ -128,7 +128,7 @@ function SmoothlyMenu() {
     	fixedSidebar();
     } else {
         $('#side-menu').removeAttr('style');
-    }*/
+    }
     if (!$('body').hasClass('mini-navbar')) {
         $(".navbar-static-side").show();  // 添加显示这一行
         $('#side-menu').hide();
